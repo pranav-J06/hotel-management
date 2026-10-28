@@ -9,10 +9,10 @@
 | :--- | :--- |
 | **Project / Product Name** | HotelStay — Cloud-Native Hotel Management & Booking Platform |
 | **Student Name** | **Pranav Jahagirdar** |
-| **Registration No.** | [Your Registration Number, e.g., 24BCEXXXX] |
-| **Course Code & Subject** | BCSE355L & Cloud Architecture Design / Database Management Systems |
-| **Slot / Section** | [Your Slot / Section, e.g., E2+TE2] |
-| **Submitted To** | [Faculty Name] |
+| **Registration No.** | **24BCE1503** |
+| **Course Code & Subject** | BCSE355L & Cloud Architecture Design |
+| **Slot / Section** | **E2+TE2** |
+| **Submitted To** | **Preetha Evangeline D** |
 | **Institution** | Vellore Institute of Technology, Chennai |
 | **Academic Year** | 2026–2027 |
 
