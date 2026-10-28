@@ -6,14 +6,23 @@
 
 set -e
 
-echo "🚀 [1/5] Setting up 2GB Swap Memory (prevents OOM on Free-Tier / Micro instances)..."
+echo "🚀 [1/5] Configuring 512MB Swap Memory (optimal for 8GB micro disks)..."
+# If a large 2GB swap was previously allocated, resize to 512MB to free 1.5GB disk space
+if [ -f /swapfile ]; then
+    CURRENT_SWAP_SIZE=$(stat -c%s /swapfile 2>/dev/null || echo 0)
+    if [ "$CURRENT_SWAP_SIZE" -gt 600000000 ]; then
+        sudo swapoff /swapfile 2>/dev/null || true
+        sudo rm -f /swapfile
+    fi
+fi
+
 if [ ! -f /swapfile ]; then
-    sudo fallocate -l 2G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
+    sudo fallocate -l 512M /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=512
     sudo chmod 600 /swapfile
     sudo mkswap /swapfile
-    sudo swapon /swapfile
-    echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
-    echo "✓ Swap configured successfully."
+    sudo swapon /swapfile 2>/dev/null || true
+    grep -q '/swapfile' /etc/fstab || echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+    echo "✓ 512MB Swap configured successfully."
 else
     echo "✓ Swap already exists."
 fi
@@ -44,6 +53,8 @@ else
 fi
 
 echo "🏗️ [4/5] Building and starting all services (MySQL, Java Backend, React Frontend)..."
+sudo apt-get clean
+sudo docker system prune -af 2>/dev/null || true
 sudo docker compose down --remove-orphans 2>/dev/null || true
 sudo docker compose up -d --build
 

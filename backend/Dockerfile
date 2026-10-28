@@ -1,6 +1,6 @@
 # Multi-stage Dockerfile for Java 17 Backend
-# Stage 1: Build
-FROM maven:3.9-eclipse-temurin-17 AS builder
+# Stage 1: Build using lightweight Alpine Maven
+FROM maven:3.10-amazoncorretto-17-alpine AS builder
 WORKDIR /app
 
 # Cache dependencies
