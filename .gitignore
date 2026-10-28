@@ -14,5 +14,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Reference PDFs (optional to exclude from remote clone)
-# *.pdf
+# Ignore PDFs
+*.pdf
+
