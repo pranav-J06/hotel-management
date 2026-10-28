@@ -1,0 +1,29 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, Helvetica, sans-serif; background: #f4f4f4; color: #222; }
+.top { background: #222; color: #fff; padding: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; }
+.top h1 { font-size: 1.2rem; }
+.top p { font-size: 0.8rem; color: #bbb; }
+.top nav { display: flex; gap: 0.5rem; }
+.top nav button { padding: 0.5rem 1rem; border: 1px solid #555; background: #333; color: #fff; cursor: pointer; border-radius: 4px; }
+.top nav button.active { background: #fff; color: #222; font-weight: bold; }
+.top nav button.ghost { background: transparent; }
+.wrap { max-width: 900px; margin: 1rem auto; padding: 0 1rem 3rem; }
+.hint { background: #fffbe6; border: 1px solid #f0d76a; padding: 0.6rem; margin-bottom: 1rem; font-size: 0.85rem; }
+.card { background: #fff; border: 1px solid #ddd; padding: 1rem; margin-bottom: 1rem; }
+.card h2 { font-size: 0.95rem; margin-bottom: 0.8rem; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.grid label { font-size: 0.8rem; display: flex; flex-direction: column; gap: 0.25rem; }
+input, select, button { padding: 0.5rem; font-size: 0.85rem; }
+input, select { border: 1px solid #bbb; width: 100%; }
+button { background: #222; color: #fff; border: none; cursor: pointer; }
+button.ghost { background: #eee; color: #222; border: 1px solid #bbb; }
+button:hover { opacity: 0.85; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 0.5rem; }
+th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+th { background: #eee; }
+.muted { color: #777; font-size: 0.75rem; }
+.empty { text-align: center; color: #888; }
+.sql { display: block; background: #222; color: #8f8; padding: 0.6rem; margin-top: 0.8rem; font-size: 0.78rem; overflow-x: auto; }
+.count { margin-top: 0.5rem; font-size: 0.85rem; font-weight: bold; }
+.toast { position: fixed; top: 70px; right: 16px; background: #222; color: #fff; padding: 0.6rem 1rem; border-radius: 4px; z-index: 10; }
+@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
