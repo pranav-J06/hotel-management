@@ -344,7 +344,7 @@
           </tr>
           <tr>
             <td class="label">Student Name</td>
-            <td>[Your Name]</td>
+            <td><strong>Pranav Jahagirdar</strong></td>
           </tr>
           <tr>
             <td class="label">Registration No.</td>
@@ -613,73 +613,61 @@
     <!-- ==================== 8. IMPLEMENTATION SCREENSHOTS ==================== -->
     <h2>8. Implementation Details & Demonstration Screenshots</h2>
 
-    <h3>8.1 Application Dashboard & Real-Time Analytics</h3>
+    <h3>8.1 Application Header & Live Health Status</h3>
     <p>
-      The dashboard serves as the administrative command center. It renders live summary statistic cards for Guests, Rooms, Active Bookings, and System Status, alongside quick-action navigation panels.
+      The application header displays the operator identity, active role, and live MySQL database connectivity status (<code>DB: UP</code>). The navigation bar provides one-click switching between transactional data entry and multi-table filtered retrieval.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">📊</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 8.1</div>
-      <div class="screenshot-desc">Dashboard view showing summary KPI cards (Total Guests, Total Rooms, Total Bookings) and the green "UP" System Health status.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_8_2_guests.png" alt="Figure 8.1 - Application Header & Data Entry" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 8.1 — Hotel Management System Dashboard: Real-time database metrics, KPI cards, and live system health badge.</div>
+    <div class="figure-caption">Figure 8.1 — Application Header & Navigation: Operator details (Pranav Jahagirdar • Reception) and live health indicator (DB: UP).</div>
 
-    <h3>8.2 Guest Management & Registration</h3>
+    <h3>8.2 Guest & Room Management (Enter Details View)</h3>
     <p>
-      The Guest Management module provides comprehensive CRUD controls. The table displays guest IDs, full names, dates of birth, genders, and validated contact numbers.
+      The Guest and Room management interface provides transactional forms to insert new entities into the normalized BCNF schema. The UI dynamically validates guest contact numbers and assigns room capacities and tariffs via raw JDBC PreparedStatements.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">👥</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 8.2</div>
-      <div class="screenshot-desc">Guests view showing the directory table of registered guests loaded from MySQL and the guest registration form.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_8_2_guests.png" alt="Figure 8.2 - Enter Details View" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 8.2 — Guest Management Module: Guest directory table with mobile validation and registration form.</div>
+    <div class="figure-caption">Figure 8.2 — Data Entry Module: Transactional forms for Guest, Room, and Booking insertion into MySQL with active DB status indicator (DB: UP).</div>
 
-    <h3>8.3 Room Inventory & Real-Time Availability</h3>
+    <h3>8.3 Room & Booking Allocation Form</h3>
     <p>
-      The Rooms view provides a visual catalog of hotel rooms, their types, nightly tariffs, and live occupancy statuses. The "Show Available Only" toggle instantly filters out occupied rooms.
+      The Room and Booking forms allow front-desk receptionists to allocate available rooms to registered guests, specify booking channels (Walk-in, Online, Phone), and track confirmation status.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">🛏️</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 8.3</div>
-      <div class="screenshot-desc">Rooms tab displaying room cards or table with status badges (Available/Occupied) and the availability filter in action.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_8_5_bills_bookings.png" alt="Figure 8.3 - Room and Booking Allocation" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 8.3 — Room Inventory View: Real-time room status badges, pricing per night, and availability filter.</div>
+    <div class="figure-caption">Figure 8.3 — Room Inventory & Reservation Forms: Dynamic room type selection and booking creation cards.</div>
 
     <div class="page-break"></div>
 
-    <h3>8.4 Reservation Engine & Booking Lifecycle</h3>
+    <h3>8.4 Filtered Retrieval & Relational SQL View (vw_booking_details)</h3>
     <p>
-      The Booking interface allows staff to generate new bookings by selecting registered guests and available rooms. The detailed booking view utilizes the <code>vw_booking_details</code> database view.
+      The Retrieve / Search view executes real-time multi-criteria filtering against the <code>vw_booking_details</code> SQL view. It displays the live SQL query preview (<code>SELECT * FROM vw_booking_details;</code>) and renders joined guest names, contact numbers, room numbers, and reservation schedules.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">📅</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 8.4</div>
-      <div class="screenshot-desc">Bookings page showing the booking form with dynamic Guest/Room dropdowns and the list of confirmed reservations below.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_8_4_retrieve_search.png" alt="Figure 8.4 - Retrieve and Search View" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 8.4 — Reservation Engine: Booking creation modal with dynamic dropdowns and detailed booking table.</div>
+    <div class="figure-caption">Figure 8.4 — Relational View Query: Live execution of vw_booking_details with multi-field WHERE filter and joined results table.</div>
 
-    <h3>8.5 Billing, Invoicing & Settlement</h3>
+    <h3>8.5 Billing & Invoicing Form</h3>
     <p>
-      The Billing view maintains records of all financial transactions. Each entry details the invoice ID, associated booking, total amount, payment method (Credit Card, UPI, Cash), transaction timestamp, and settlement status.
+      The Billing module enables front-desk staff to generate itemized invoices linked via foreign key to active <code>Booking_ID</code> records, specifying billing amounts and tracking payment settlement.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">💳</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 8.5</div>
-      <div class="screenshot-desc">Bills tab showing issued invoices, payment method breakdown, amounts, and settlement statuses (Paid/Pending).</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_8_5_bills_bookings.png" alt="Figure 8.5 - Billing and Invoicing Form" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 8.5 — Billing Management: Invoice records, payment modes, and financial settlement status.</div>
+    <div class="figure-caption">Figure 8.5 — Billing Management: Add Bill form linking payments to guest and booking entities.</div>
 
     <h3>8.6 System Health Check Endpoint</h3>
     <p>
       The diagnostic API endpoint (<code>/api/health</code>) verifies live end-to-end database connectivity, returning a JSON payload confirming <code>status: UP</code> and the target database <code>hotel_management</code>.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">🩺</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 8.6</div>
-      <div class="screenshot-desc">Browser or cURL output showing JSON response from /api/health: {"status":"UP","db":"hotel_management"} returning HTTP 200 OK.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_8_6_health_check.png" alt="Figure 8.6 - System Health Check JSON" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 8.6 — Health Check Verification: JSON response from the Java backend confirming active MySQL connection.</div>
+    <div class="figure-caption">Figure 8.6 — Health Check Verification: JSON response from the Java backend confirming active MySQL connection over Port 80.</div>
 
     <div class="page-break"></div>
 
@@ -690,34 +678,28 @@
     <p>
       The EC2 console demonstrates that the Ubuntu virtual instance is active in the <strong>Running</strong> state with system status checks passing (2/2 checks), assigned a public IPv4 address, and residing in the <code>ap-south-1</code> region.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">☁️</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 9.1</div>
-      <div class="screenshot-desc">AWS EC2 Console showing the instance in "Running" state, instance ID, instance type (t2.micro/t3.micro), Status Check "2/2 checks passed", Public IPv4.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_9_1_ec2_running.png" alt="Figure 9.1 - EC2 Running Status" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.1 — Amazon EC2 Management Console: Virtual server in Running state with passing status checks.</div>
+    <div class="figure-caption">Figure 9.1 — Amazon EC2 Management Console: Virtual server (t3.micro, i-0601e61a67c089561) in Running state with public IP 15.206.165.236.</div>
 
     <h3>9.2 EC2 Instance Configuration Details</h3>
     <p>
-      The configuration panel reveals the architectural specifications of the compute instance: Amazon Machine Image (Ubuntu 22.04 LTS), virtual private cloud (VPC) ID, public subnet allocation, and attached 8 GiB gp3 EBS volume.
+      The configuration panel reveals the architectural specifications of the compute instance: Amazon Machine Image (Ubuntu 24.04 LTS), virtual private cloud (VPC) ID <code>vpc-03654105d1079a2d5</code>, public subnet allocation <code>subnet-0ccec48796ac7db5d</code>, and assigned public IPv4 address <code>15.206.165.236</code>.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">⚙️</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 9.2</div>
-      <div class="screenshot-desc">Detailed summary tab of the EC2 instance showing AMI, VPC ID, Subnet ID, Platform details, and Public IP attributes.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_9_2_ec2_details.png" alt="Figure 9.2 - EC2 Configuration Details" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.2 — EC2 Configuration Summary: Subnet, VPC, AMI, and storage attributes.</div>
+    <div class="figure-caption">Figure 9.2 — EC2 Configuration Summary: Subnet, VPC ID, Private IP (172.31.10.113), and Public IPv4 address.</div>
 
     <h3>9.3 EC2 Security Group Inbound & Outbound Rules</h3>
     <p>
       The Security Group acts as an enterprise firewall. Inbound rules explicitly permit <strong>HTTP (TCP port 80)</strong> from all IPv4 sources (<code>0.0.0.0/0</code>) and <strong>SSH (TCP port 22)</strong> for administration.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">🛡️</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 9.3</div>
-      <div class="screenshot-desc">Security Group rules table displaying HTTP (TCP 80) and SSH (TCP 22) from 0.0.0.0/0.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_9_3_security_group.png" alt="Figure 9.3 - Security Group Inbound Rules" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.3 — Security Group Configuration: Inbound firewall rules enforcing least-privilege network access.</div>
+    <div class="figure-caption">Figure 9.3 — Security Group Configuration: Inbound firewall rules enforcing HTTP (Port 80) and SSH (Port 22) access.</div>
 
     <div class="page-break"></div>
 
@@ -725,34 +707,28 @@
     <p>
       Executing <code>sudo docker compose ps</code> within the EC2 terminal verifies that all three isolated container services (<code>hotel_frontend</code>, <code>hotel_backend</code>, and <code>hotel_db</code>) are running and healthy.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">🐳</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 9.4</div>
-      <div class="screenshot-desc">EC2 terminal output of 'docker compose ps' showing hotel_frontend, hotel_backend, and hotel_db in Up/healthy states.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_9_4_docker_ps.png" alt="Figure 9.4 - Docker Multi-Container Status" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.4 — Docker Multi-Container Status: Active containers for Nginx, Java backend, and MySQL database.</div>
+    <div class="figure-caption">Figure 9.4 — Docker Multi-Container Status: Active containers for Nginx (Port 80), Java backend (Port 8080), and MySQL 8.0 (healthy).</div>
 
     <h3>9.5 MySQL Database Container & BCNF Schema Verification</h3>
     <p>
       Terminal execution inside the MySQL container showing the result of <code>SHOW TABLES;</code> and verification of the 13 BCNF tables and 2 views within the <code>hotel_management</code> database schema.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">🗄️</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 9.5</div>
-      <div class="screenshot-desc">Terminal output of 'SHOW TABLES;' inside MySQL showing all 13 tables and the views (vw_booking_details, vw_employee_details).</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_9_5_mysql_tables.png" alt="Figure 9.5 - MySQL 13 BCNF Tables" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.5 — MySQL Schema Verification: Terminal output showing all 13 BCNF relations and views.</div>
+    <div class="figure-caption">Figure 9.5 — MySQL Schema Verification: Terminal execution confirming all 13 BCNF relational tables and 2 SQL views in hotel_management.</div>
 
     <h3>9.6 Nginx Reverse Proxy & HTTP Port 80 Routing</h3>
     <p>
       Demonstrates external HTTP access to the application via the EC2 Public IPv4 address in a browser without any port number (standard port 80), proving that Nginx is successfully routing requests.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">🌐</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 9.6</div>
-      <div class="screenshot-desc">Browser address bar showing http://&lt;EC2-PUBLIC-IP&gt;/ with the hotel management web application loading seamlessly over port 80.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_9_6_public_url.png" alt="Figure 9.6 - Public Cloud Access on Port 80" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.6 — Public Cloud Access: Web application loading seamlessly over the EC2 public IPv4 address.</div>
+    <div class="figure-caption">Figure 9.6 — Public Cloud Access: Hotel management web application loading seamlessly over the EC2 public IPv4 address (http://15.206.165.236/) on standard HTTP Port 80.</div>
 
     <div class="page-break"></div>
 
@@ -760,23 +736,19 @@
     <p>
       Terminal output of <code>sudo docker compose logs backend</code> showing the Java 17 application boot sequence, dynamic environment variable loading (<code>DB_URL</code>, <code>PORT</code>), and successful database handshake.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">📜</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 9.7</div>
-      <div class="screenshot-desc">Terminal output of 'docker compose logs backend' displaying "DB connection OK" and registered REST handlers.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_9_7_backend_logs.png" alt="Figure 9.7 - Java Backend Runtime Logs" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.7 — Backend Runtime Logs: Java 17 API startup, successful database connection, and route registration.</div>
+    <div class="figure-caption">Figure 9.7 — Backend Runtime Logs: Java 17 API startup, successful database connection (✓ DB connection OK), and route registration.</div>
 
     <h3>9.8 Amazon CloudWatch System Performance Metrics</h3>
     <p>
       CloudWatch dashboard graphs illustrating real-time CPU Utilization (typically &lt; 5%), Network In/Out traffic bytes, and Disk Read/Write operations on the EC2 host during live application testing.
     </p>
-    <div class="screenshot-box">
-      <div class="screenshot-icon">📈</div>
-      <div class="screenshot-title">PASTE SCREENSHOT: FIGURE 9.8</div>
-      <div class="screenshot-desc">CloudWatch Monitoring graphs for the EC2 instance displaying CPU Utilization percentage and Network traffic.</div>
+    <div style="text-align: center; margin: 15px 0;">
+      <img src="images/figure_9_8_cloudwatch_metrics.png" alt="Figure 9.8 - Amazon CloudWatch Performance Metrics" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.8 — Amazon CloudWatch Metrics: CPU utilization and network throughput graphs for the application server.</div>
+    <div class="figure-caption">Figure 9.8 — Amazon CloudWatch Monitoring: Real-time CPU utilization (&lt; 21%), network throughput, and packet count telemetry for hotel-management-server.</div>
 
     <div class="page-break"></div>
 

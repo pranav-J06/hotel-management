@@ -8,7 +8,7 @@
 | Field | Details |
 | :--- | :--- |
 | **Project / Product Name** | HotelStay — Cloud-Native Hotel Management & Booking Platform |
-| **Student Name** | [Your Name] |
+| **Student Name** | **Pranav Jahagirdar** |
 | **Registration No.** | [Your Registration Number, e.g., 24BCEXXXX] |
 | **Course Code & Subject** | BCSE355L & Cloud Architecture Design / Database Management Systems |
 | **Slot / Section** | [Your Slot / Section, e.g., E2+TE2] |
@@ -239,117 +239,57 @@ The `/api/health` route tests the underlying JDBC database connection pool and r
 
 The following subsections showcase the operational user interface of the Hotel Management System deployed on AWS EC2.
 
-### 8.1 Application Dashboard & Real-Time Analytics
-The primary dashboard serves as the administrative command center. It renders live summary statistic cards for Guests, Rooms, Active Bookings, and System Status, alongside quick-action navigation panels.
+### 8.1 Application Header & Live Health Status
+The application header displays the operator identity, active role, and live MySQL database connectivity status (`DB: UP`). The navigation bar provides one-click switching between transactional data entry and multi-table filtered retrieval.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 8.1 ]                               |
-|                                                                                   |
-|                 APPLICATION DASHBOARD & REAL-TIME ANALYTICS                       |
-|                                                                                   |
-|  Capture: The home dashboard view showing summary metric counters (Total Guests,  |
-|  Total Rooms, Total Bookings, Revenue) and the green "UP" System Health status.   |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 8.1** — *Hotel Management System Dashboard: Real-time database metrics, KPI cards, and live system health badge.*
+![Figure 8.1 — Application Header & Data Entry](images/figure_8_2_guests.png)
+
+**Figure 8.1** — *Application Header & Navigation: Operator details (Pranav Jahagirdar • Reception) and live health indicator (DB: UP).*
 
 ---
 
-### 8.2 Guest Management & Registration
-The Guest Management module provides comprehensive CRUD controls. The table displays guest IDs, full names, dates of birth, genders, and validated contact numbers, with action buttons to register new guests or delete existing entries.
+### 8.2 Guest & Room Management (Enter Details View)
+The Guest and Room management interface provides transactional forms to insert new entities into the normalized BCNF schema. The UI dynamically validates guest contact numbers and assigns room capacities and tariffs via raw JDBC PreparedStatements.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 8.2 ]                               |
-|                                                                                   |
-|                       GUEST DIRECTORY & REGISTRATION FORM                         |
-|                                                                                   |
-|  Capture: The Guests view showing the list of registered guests from MySQL,       |
-|  the modal or form to add a new guest, and delete action buttons.                 |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 8.2** — *Guest Management Module: Guest directory table with mobile validation and registration form.*
+![Figure 8.2 — Enter Details View](images/figure_8_2_guests.png)
+
+**Figure 8.2** — *Data Entry Module: Transactional forms for Guest, Room, and Booking insertion into MySQL with active DB status indicator (DB: UP).*
 
 ---
 
-### 8.3 Room Inventory & Real-Time Availability
-The Rooms view provides a visual catalog of hotel rooms, their types, nightly tariffs, and live occupancy statuses. The "Show Available Only" toggle instantly filters out occupied rooms for fast booking decisions.
+### 8.3 Room & Booking Allocation Form
+The Room and Booking forms allow front-desk receptionists to allocate available rooms to registered guests, specify booking channels (Walk-in, Online, Phone), and track confirmation status.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 8.3 ]                               |
-|                                                                                   |
-|                        ROOM INVENTORY & AVAILABILITY VIEW                         |
-|                                                                                   |
-|  Capture: The Rooms tab displaying room cards or table (Room No, Type, Capacity,   |
-|  Price/Night, Status badge Available/Occupied) and the availability filter.       |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 8.3** — *Room Inventory View: Real-time room status badges, pricing per night, and availability filter.*
+![Figure 8.3 — Room Inventory & Reservation Forms](images/figure_8_5_bills_bookings.png)
+
+**Figure 8.3** — *Room Inventory & Reservation Forms: Dynamic room type selection and booking creation cards.*
 
 ---
 
-### 8.4 Reservation Engine & Booking Lifecycle
-The Booking interface allows staff to generate new bookings by selecting registered guests and available rooms. The detailed booking view utilizes the `vw_booking_details` database view to display combined booking, room, and guest information.
+### 8.4 Filtered Retrieval & Relational SQL View (vw_booking_details)
+The Retrieve / Search view executes real-time multi-criteria filtering against the `vw_booking_details` SQL view. It displays the live SQL query preview (`SELECT * FROM vw_booking_details;`) and renders joined guest names, contact numbers, room numbers, and reservation schedules.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 8.4 ]                               |
-|                                                                                   |
-|                       BOOKING CREATION & DETAILED VIEW                            |
-|                                                                                   |
-|  Capture: The Bookings page showing the booking form with Guest/Room dropdowns,   |
-|  check-in/check-out dates, and the list of confirmed reservations below.          |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 8.4** — *Reservation Engine: Booking creation modal with dynamic dropdowns and detailed booking table.*
+![Figure 8.4 — Retrieve and Search View](images/figure_8_4_retrieve_search.png)
+
+**Figure 8.4** — *Relational View Query: Live execution of vw_booking_details with multi-field WHERE filter and joined results table.*
 
 ---
 
-### 8.5 Billing, Invoicing & Settlement
-The Billing view maintains records of all financial transactions. Each entry details the invoice ID, associated booking, total amount, payment method (Credit Card, UPI, Cash), transaction timestamp, and settlement status.
+### 8.5 Billing & Invoicing Form
+The Billing module enables front-desk staff to generate itemized invoices linked via foreign key to active `Booking_ID` records, specifying billing amounts and tracking payment settlement.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 8.5 ]                               |
-|                                                                                   |
-|                           BILLING & INVOICING RECORDS                             |
-|                                                                                   |
-|  Capture: The Bills tab showing issued invoices, payment method breakdown,        |
-|  amounts, and settlement statuses (Paid/Pending).                                 |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 8.5** — *Billing Management: Invoice records, payment modes, and financial settlement status.*
+![Figure 8.5 — Billing and Invoicing Form](images/figure_8_5_bills_bookings.png)
+
+**Figure 8.5** — *Billing Management: Add Bill form linking payments to guest and booking entities.*
 
 ---
 
 ### 8.6 System Health Check Endpoint
 The diagnostic API endpoint (`/api/health`) verifies live end-to-end database connectivity. A browser request to this endpoint returns a JSON payload confirming `status: UP` and the target database `hotel_management`.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 8.6 ]                               |
-|                                                                                   |
-|                       SYSTEM HEALTH CHECK JSON RESPONSE                           |
-|                                                                                   |
-|  Capture: Browser or cURL output showing JSON response from /api/health:          |
-|  {"status":"UP","db":"hotel_management"} returning HTTP 200 OK.                   |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 8.6** — *Health Check Verification: JSON response from the Java backend confirming active MySQL connection.*
+![Figure 8.6 — System Health Check JSON](images/figure_8_6_health_check.png)
+
+**Figure 8.6** — *Health Check Verification: JSON response from the Java backend confirming active MySQL connection over Port 80.*
 
 ---
 
@@ -360,159 +300,72 @@ The following screenshots provide empirical evidence of the cloud infrastructure
 ### 9.1 Amazon EC2 Instance — Running Status
 The EC2 console demonstrates that the Ubuntu virtual instance is active in the **Running** state with system status checks passing (2/2 checks), assigned a public IPv4 address, and residing in the `ap-south-1` region.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 9.1 ]                               |
-|                                                                                   |
-|                    AMAZON EC2 CONSOLE — RUNNING INSTANCE                          |
-|                                                                                   |
-|  Capture: AWS EC2 Console showing the instance in "Running" state, instance ID,   |
-|  instance type (t2.micro/t3.micro), Status Check "2/2 checks passed", Public IPv4.|
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 9.1** — *Amazon EC2 Management Console: Virtual server in Running state with passing status checks.*
+![Figure 9.1 — EC2 Running Instance](images/figure_9_1_ec2_running.png)
+
+**Figure 9.1** — *Amazon EC2 Management Console: Virtual server (t3.micro, i-0601e61a67c089561) in Running state with public IP 15.206.165.236.*
 
 ---
 
 ### 9.2 EC2 Instance Configuration Details
-The configuration panel reveals the architectural specifications of the compute instance: Amazon Machine Image (Ubuntu 22.04 LTS), virtual private cloud (VPC) ID, public subnet allocation, attached 8 GiB gp3 EBS volume, and public DNS assignment.
+The configuration panel reveals the architectural specifications of the compute instance: Amazon Machine Image (Ubuntu 24.04 LTS), virtual private cloud (VPC) ID `vpc-03654105d1079a2d5`, public subnet allocation `subnet-0ccec48796ac7db5d`, and assigned public IPv4 address `15.206.165.236`.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 9.2 ]                               |
-|                                                                                   |
-|                     EC2 INSTANCE CONFIGURATION & DETAILS                          |
-|                                                                                   |
-|  Capture: Detailed summary tab of the EC2 instance showing AMI, VPC ID, Subnet ID,|
-|  Platform details, Private IP, and Elastic/Public IP attributes.                  |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 9.2** — *EC2 Configuration Summary: Subnet, VPC, AMI, and storage attributes.*
+![Figure 9.2 — EC2 Configuration Details](images/figure_9_2_ec2_details.png)
+
+**Figure 9.2** — *EC2 Configuration Summary: Subnet, VPC ID, Private IP (172.31.10.113), and Public IPv4 address.*
 
 ---
 
 ### 9.3 EC2 Security Group Inbound & Outbound Rules
 The Security Group acts as an enterprise firewall at the hypervisor level. Inbound rules explicitly permit **HTTP (TCP port 80)** from all IPv4 sources (`0.0.0.0/0`) and **SSH (TCP port 22)** for administration, while internal database ports remain closed to the public internet.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 9.3 ]                               |
-|                                                                                   |
-|                  EC2 SECURITY GROUP — INBOUND FIREWALL RULES                      |
-|                                                                                   |
-|  Capture: Security Group rules table displaying:                                  |
-|  - HTTP (TCP 80) -> 0.0.0.0/0                                                     |
-|  - SSH (TCP 22) -> 0.0.0.0/0                                                      |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 9.3** — *Security Group Configuration: Inbound firewall rules enforcing least-privilege network access.*
+![Figure 9.3 — Security Group Inbound Rules](images/figure_9_3_security_group.png)
+
+**Figure 9.3** — *Security Group Configuration: Inbound firewall rules enforcing HTTP (Port 80) and SSH (Port 22) access.*
 
 ---
 
 ### 9.4 Docker Multi-Container Orchestration Status
 Executing `sudo docker compose ps` within the EC2 terminal verifies that all three isolated container services (`hotel_frontend`, `hotel_backend`, and `hotel_db`) are running, healthy, and communicating over the bridge network.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 9.4 ]                               |
-|                                                                                   |
-|                 TERMINAL OUTPUT: DOCKER COMPOSE PS STATUS                         |
-|                                                                                   |
-|  Capture: EC2 terminal window showing output of 'docker compose ps':              |
-|  - hotel_frontend (Up, 0.0.0.0:80->80/tcp)                                        |
-|  - hotel_backend (Up, 0.0.0.0:8080->8080/tcp)                                     |
-|  - hotel_db (Up, healthy, 127.0.0.1:3306->3306/tcp)                               |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 9.4** — *Docker Multi-Container Status: Active containers for Nginx, Java backend, and MySQL database.*
+![Figure 9.4 — Docker Multi-Container Status](images/figure_9_4_docker_ps.png)
+
+**Figure 9.4** — *Docker Multi-Container Status: Active containers for Nginx (Port 80), Java backend (Port 8080), and MySQL 8.0 (healthy).*
 
 ---
 
 ### 9.5 MySQL Database Container & BCNF Schema Verification
 Terminal execution inside the MySQL container showing the result of `SHOW TABLES;` and verification of the 13 BCNF tables and 2 views within the `hotel_management` database schema.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 9.5 ]                               |
-|                                                                                   |
-|                 MYSQL CLI: 13 BCNF TABLES & VIEWS VERIFIED                        |
-|                                                                                   |
-|  Capture: Terminal output of 'SHOW TABLES;' inside MySQL showing all 13 tables    |
-|  (Bill, Booking_Record, Employee, Guest, Housekeeper, Room, ZipCode, etc.)        |
-|  and the views (vw_booking_details, vw_employee_details).                         |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 9.5** — *MySQL Schema Verification: Terminal output showing all 13 BCNF relations and views.*
+![Figure 9.5 — MySQL 13 BCNF Tables](images/figure_9_5_mysql_tables.png)
+
+**Figure 9.5** — *MySQL Schema Verification: Terminal execution confirming all 13 BCNF relational tables and 2 SQL views in hotel_management.*
 
 ---
 
 ### 9.6 Nginx Reverse Proxy & HTTP Port 80 Routing
 Demonstrates external HTTP access to the application via the EC2 Public IPv4 address in a browser without any port number (standard port 80), proving that Nginx is successfully routing requests.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 9.6 ]                               |
-|                                                                                   |
-|              BROWSER URL BAR SHOWING PUBLIC EC2 IP (PORT 80)                      |
-|                                                                                   |
-|  Capture: Browser address bar showing http://<EC2-PUBLIC-IP>/ with the hotel      |
-|  management web application loading seamlessly over standard HTTP port 80.        |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 9.6** — *Public Cloud Access: Web application loading seamlessly over the EC2 public IPv4 address.*
+![Figure 9.6 — Public Cloud Access](images/figure_9_6_public_url.png)
+
+**Figure 9.6** — *Public Cloud Access: Hotel management web application loading seamlessly over the EC2 public IPv4 address (http://15.206.165.236/) on standard HTTP Port 80.*
 
 ---
 
 ### 9.7 Java Backend REST API Execution Logs
 Terminal output of `sudo docker compose logs backend` showing the Java 17 application boot sequence, dynamic environment variable loading (`DB_URL`, `PORT`), successful database handshake, and registration of all REST endpoints.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 9.7 ]                               |
-|                                                                                   |
-|                   JAVA 17 BACKEND CONTAINER EXECUTION LOGS                        |
-|                                                                                   |
-|  Capture: Terminal output of 'docker compose logs backend' displaying:            |
-|  - "✓ DB connection OK"                                                           |
-|  - "Hotel Management API running at http://localhost:8080"                       |
-|  - Registered REST handlers for guests, rooms, bookings, bills, and health.       |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 9.7** — *Backend Runtime Logs: Java 17 API startup, successful database connection, and route registration.*
+![Figure 9.7 — Java Backend Runtime Logs](images/figure_9_7_backend_logs.png)
+
+**Figure 9.7** — *Backend Runtime Logs: Java 17 API startup, successful database connection (✓ DB connection OK), and route registration.*
 
 ---
 
 ### 9.8 Amazon CloudWatch System Performance Metrics
-CloudWatch dashboard graphs illustrating real-time CPU Utilization (typically < 5%), Network In/Out traffic bytes, and Disk Read/Write operations on the EC2 host during live application testing.
+CloudWatch dashboard graphs illustrating real-time CPU Utilization (typically < 21%), Network In/Out traffic bytes, and Disk Read/Write operations on the EC2 host during live application testing.
 
-```
-+-----------------------------------------------------------------------------------+
-|                                                                                   |
-|                         [ PLACEHOLDER: FIGURE 9.8 ]                               |
-|                                                                                   |
-|                 AMAZON CLOUDWATCH EC2 PERFORMANCE METRICS                         |
-|                                                                                   |
-|  Capture: CloudWatch Monitoring graphs for the EC2 instance displaying:           |
-|  - CPU Utilization percentage graph                                               |
-|  - Network In / Network Out traffic spikes during testing                         |
-|                                                                                   |
-+-----------------------------------------------------------------------------------+
-```
-**Figure 9.8** — *Amazon CloudWatch Metrics: CPU utilization and network throughput graphs for the application server.*
+![Figure 9.8 — Amazon CloudWatch Performance Metrics](images/figure_9_8_cloudwatch_metrics.png)
+
+**Figure 9.8** — *Amazon CloudWatch Monitoring: Real-time CPU utilization (< 21%), network throughput, and packet count telemetry for hotel-management-server.*
 
 ---
 
