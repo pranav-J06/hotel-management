@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="images/vit_chennai_logo.png" alt="VIT Chennai Logo" width="300"/>
+</p>
+
 # DA3 CAD PROJECT REPORT
 ## Cloud-Native Hotel Management System Using AWS Cloud Resources and BCNF Relational Architecture
 
