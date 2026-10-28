@@ -163,13 +163,13 @@ def create_word_report():
         ("4. System Architecture", "4"),
         ("5. AWS Services & Infrastructure Components Used", "5"),
         ("6. Database Schema & BCNF Normalization", "6"),
-        ("7. Application Features", "7"),
-        ("8. Implementation Details & Demonstration Screenshots", "8"),
-        ("    8.1 Application Header & Live Health Status", "8"),
+        ("7. Application Features", "8"),
+        ("8. Implementation Details & Demonstration Screenshots", "9"),
+        ("    8.1 Application Header & Live Health Status", "9"),
         ("    8.2 Guest & Room Management (Enter Details View)", "9"),
-        ("    8.3 Room & Booking Allocation Form", "9"),
+        ("    8.3 Room & Booking Allocation Form", "10"),
         ("    8.4 Filtered Retrieval & Relational SQL View (vw_booking_details)", "10"),
-        ("    8.5 Billing & Invoicing Form", "10"),
+        ("    8.5 Billing & Invoicing Form", "11"),
         ("    8.6 System Health Check Endpoint", "11"),
         ("9. AWS Infrastructure Screenshots", "12"),
         ("    9.1 Amazon EC2 Instance — Running Status", "12"),
@@ -189,7 +189,6 @@ def create_word_report():
         p.paragraph_format.space_after = Pt(2)
         r_t = p.add_run(title)
         r_t.font.size = Pt(10.5)
-        # Tab stop or dots
         dots_count = max(5, 75 - len(title))
         r_dots = p.add_run(" " + "." * dots_count + " ")
         r_dots.font.color.rgb = RGBColor(0x8C, 0x8C, 0x8C)
@@ -205,19 +204,19 @@ def create_word_report():
         "cloud-native Hotel Management System developed as the DA3 project at Vellore Institute of Technology, Chennai. "
         "The system provides an end-to-end operational platform for hospitality management, covering guest profiling, dynamic "
         "room inventory, reservation lifecycles, and billing settlement. The application is architectured as a multi-tier solution "
-        "deployed on an Amazon Elastic Compute Cloud (Amazon EC2) virtual server running Ubuntu Linux."
+        "deployed on an Amazon Elastic Compute Cloud (Amazon EC2) virtual server running Ubuntu Linux in the ap-south-1 (Mumbai) region."
     )
     doc.add_paragraph(
         "The frontend presentation tier is built with React 18 and bundled using Vite, served through a high-performance Nginx web server "
-        "that acts as a reverse proxy on HTTP port 80. The application tier comprises a custom Java 17 REST API server utilizing raw Java "
+        "acting as a reverse proxy on HTTP port 80. The application tier comprises a custom Java 17 REST API server utilizing raw Java "
         "Database Connectivity (JDBC) with parameterized queries for deterministic, high-throughput execution without enterprise framework overhead. "
         "The persistence tier is powered by MySQL 8.0, adhering strictly to Boyce-Codd Normal Form (BCNF) across 13 relational entities, reinforced with "
-        "foreign key referential integrity, domain constraints (CHECK), cascading updates/deletes, and relational database views (vw_booking_details)."
+        "foreign key referential integrity, domain constraints (CHECK), cascading actions, and relational database views (vw_booking_details)."
     )
     doc.add_paragraph(
-        "All tiers are orchestrated using Docker and Docker Compose, isolating database and backend communication within an internal container network, "
-        "eliminating Cross-Origin Resource Sharing (CORS) vulnerabilities. Operational resilience is ensured on AWS Free-Tier compute through an automated "
-        "512MB virtual memory swap configuration and Amazon CloudWatch performance monitoring."
+        "All tiers are containerized and orchestrated using Docker and Docker Compose. Nginx acts as the single public gateway on port 80, eliminating "
+        "Cross-Origin Resource Sharing (CORS) complexity and proxying API traffic internally to the backend. Operational resilience on AWS Free-Tier "
+        "compute is ensured through an automated 512MB virtual memory swap configuration and integrated Amazon CloudWatch telemetry monitoring."
     )
 
     # ==================== 2. INTRODUCTION ====================
@@ -233,9 +232,9 @@ def create_word_report():
         "on Amazon Web Services (AWS)."
     )
     doc.add_paragraph(
-        "The core database design enforces complete Boyce-Codd Normal Form (BCNF) normalization to eliminate data insertion, update, and deletion anomalies. "
-        "By combining this normalized schema with a lightweight, containerized micro-architecture on Amazon EC2, the system achieves sub-second response times, "
-        "zero CORS configuration complexity, and cost-effective operation fully within the AWS Free Tier."
+        "The core database design enforces Boyce-Codd Normal Form (BCNF) normalization to eliminate data insertion, update, and deletion anomalies. "
+        "By combining this normalized schema with a lightweight, containerized micro-architecture on Amazon EC2, the system achieves responsive sub-second page rendering, "
+        "zero CORS configuration complexity, and cost-effective operation within the AWS Free Tier."
     )
 
     # ==================== 3. OBJECTIVES AND SCOPE ====================
@@ -245,10 +244,10 @@ def create_word_report():
         "High-Performance Application Core: Develop a Java 17 backend utilizing standard HTTP server libraries (com.sun.net.httpserver.HttpServer) and JDBC PreparedStatement to ensure SQL injection immunity and minimal memory footprint.",
         "Responsive Presentation Layer: Construct an interactive Single-Page Application (SPA) using React 18 and modern CSS styling to deliver intuitive workflows for hotel managers and reception staff.",
         "Cloud Infrastructure Deployment: Provision an Amazon EC2 (t3.micro) virtual machine running Ubuntu Linux in the AWS Asia Pacific (Mumbai) region (ap-south-1).",
-        "Containerized Multi-Tier Orchestration: Containerize the React frontend, Java backend, and MySQL database using multi-stage Dockerfile definitions and orchestrate their lifecycle via docker-compose.yml.",
+        "Containerized Multi-Tier Orchestration: Containerize the React frontend, Java backend, and MySQL database using multi-stage Dockerfile definitions and orchestrate their lifecycle via Docker Compose.",
         "Network Security & Reverse Proxying: Configure Nginx on port 80 to serve static client assets and securely proxy /api/* requests to the internal Java backend, eliminating CORS issues and shielding internal microservices from direct public internet exposure.",
         "Cloud Cost & Resource Optimization: Enact a 512MB virtual swap configuration on Ubuntu to ensure smooth compilation and container execution on resource-constrained Free-Tier instances without out-of-memory (OOM) failures.",
-        "Cloud Observability: Monitor CPU utilization, network traffic, and system logs through Amazon CloudWatch and container health checks."
+        "Cloud Observability: Monitor CPU utilization, network traffic, and system logs through integrated Amazon CloudWatch telemetry and container health checks."
     ]
     for obj in objectives:
         p = doc.add_paragraph(style='List Bullet')
@@ -263,16 +262,16 @@ def create_word_report():
     # ==================== 4. SYSTEM ARCHITECTURE ====================
     add_h1("4. System Architecture")
     doc.add_paragraph(
-        "The application implements a decoupled, three-tier cloud architecture hosted on an Amazon EC2 virtual server. "
-        "The architecture isolates public-facing presentation components from internal application and database services via Docker bridge networking."
+        "The application implements a decoupled, three-tier cloud architecture hosted on an Amazon EC2 virtual server (t3.micro). "
+        "The architecture separates public-facing presentation components from internal application and database services through container network abstraction and AWS security group firewalls."
     )
 
     arch_table_data = [
-        ("Tier", "Component", "Technology", "Responsibilities"),
-        ("Presentation", "Web Server & Client SPA", "React 18, Vite, Nginx, Alpine", "Delivers responsive UI; manages client routing; proxies /api/* requests to backend container; handles gzip compression."),
-        ("Application", "REST API Microservice", "Java 17 (Corretto/Temurin), JDBC, Gson", "Executes business logic; handles HTTP endpoints; coordinates database transactions; performs input sanitization."),
-        ("Persistence", "Relational Database", "MySQL 8.0, InnoDB, utf8mb4", "Enforces referential integrity; maintains transactional ACID guarantees; runs BCNF relations, views, and indexes."),
-        ("Infrastructure", "Compute & Host", "AWS EC2 (t3.micro), Ubuntu 24.04 LTS", "Virtual server host; provides Linux kernel namespaces; maintains swap space; enforces AWS Security Group firewall.")
+        ("Tier", "Component", "Technology", "Responsibilities & Network Exposure"),
+        ("Presentation", "Web Server & Client SPA", "React 18, Vite, Nginx, Alpine", "Serves client SPA on HTTP Port 80; reverse-proxies /api/* requests to backend container; handles gzip compression. Publicly exposed to 0.0.0.0/0."),
+        ("Application", "REST API Microservice", "Java 17 (Corretto/Temurin), JDBC, Gson", "Executes business logic and JDBC queries; bound to host port 8080 for direct container diagnostics, but shielded from external internet ingress by the AWS Security Group."),
+        ("Persistence", "Relational Database", "MySQL 8.0, InnoDB, utf8mb4", "Maintains transactional ACID guarantees; enforces BCNF relations, views, and indexes. Bound exclusively to 127.0.0.1 (loopback), completely inaccessible to public internet."),
+        ("Infrastructure", "Compute & Host", "AWS EC2 (t3.micro), Ubuntu 24.04 LTS", "Virtual server host; provides Linux kernel namespaces; maintains 512MB swap space; enforces AWS Security Group firewall perimeter.")
     ]
     t_arch = doc.add_table(rows=len(arch_table_data), cols=4)
     t_arch.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -292,18 +291,27 @@ def create_word_report():
                     set_cell_background(cell, "F9F9F9")
                 p.runs[0].font.size = Pt(9.5)
 
+    doc.add_paragraph()
+    doc.add_paragraph(
+        "Network Ingress & Defense-in-Depth Model:\n"
+        "1. External traffic enters exclusively through standard HTTP Port 80 managed by Nginx.\n"
+        "2. The Nginx reverse proxy routes client requests for / to the compiled static assets and proxies /api/* requests internally to the Java backend (hotel_backend:8080) over the Docker bridge network (app_default).\n"
+        "3. While host port 8080 is published for developer diagnosis on the EC2 machine, the external AWS Security Group (launch-wizard-1) does not permit port 8080 inbound from the internet, ensuring defense-in-depth.\n"
+        "4. MySQL is bound strictly to the host loopback interface (127.0.0.1:3306), ensuring that external network packets cannot reach the persistence layer directly."
+    )
+
     # ==================== 5. AWS SERVICES USED ====================
     add_h1("5. AWS Services & Infrastructure Components Used")
     aws_table_data = [
         ("AWS / Cloud Service", "Resource Identifier / Type", "Purpose & Architecture Role"),
-        ("Amazon EC2", "t3.micro (Ubuntu 24.04 LTS)", "Provides scalable virtual compute host for running containerized services within the AWS Free Tier."),
-        ("Amazon VPC", "Default VPC (ap-south-1)", "Provides logical network isolation, public subnets, and routing table configuration for the host instance."),
-        ("Security Groups", "launch-wizard-1 (sg-05c58f0544aeeeb4d)", "Acts as virtual firewall: allows inbound HTTP (Port 80) from 0.0.0.0/0 and SSH (Port 22) for administration."),
-        ("Amazon EBS", "8 GiB General Purpose SSD (gp3)", "Provides persistent block-level root storage for the OS, container images, and MySQL database volume."),
-        ("Amazon CloudWatch", "EC2 System Metrics (AWS/EC2)", "Real-time monitoring of CPU utilization, network traffic (bytes in/out), and disk operations at 1-minute granularity."),
+        ("Amazon EC2", "t3.micro (Ubuntu 24.04 LTS)", "Provides scalable virtual compute host for running containerized services within the AWS Free Tier (ap-south-1)."),
+        ("Amazon VPC", "Default VPC (ap-south-1)", "Provides logical network isolation, public subnets (subnet-0ccec48796ac7db5d), and internet gateway routing."),
+        ("Security Groups", "launch-wizard-1 (sg-05c58f0544aeeeb4d)", "Stateful virtual firewall: permits inbound HTTP (Port 80) and SSH (Port 22); includes inherited Port 1433 rule from initial launch template."),
+        ("Amazon EBS", "8 GiB General Purpose SSD (gp3)", "Provides persistent block-level root storage for the OS, container images, and MySQL database named volume (db_data)."),
+        ("Amazon CloudWatch", "EC2 Console Monitoring (AWS/EC2)", "Integrated telemetry tracking CPU utilization (%), network in/out throughput, packet counts, and T3 CPU burst credit consumption."),
         ("Docker Engine", "Docker Community Edition v27+", "Provides lightweight, isolated runtime environments for the frontend, backend, and database containers."),
-        ("Docker Compose", "Compose Specification v3.8", "Orchestrates multi-container networking, dependencies, persistent volume mounting, and health checks."),
-        ("Linux Swap Space", "512 MiB Virtual Swap (/swapfile)", "Augments physical RAM of Free-Tier EC2 instance, preventing Out-Of-Memory compilation aborts.")
+        ("Docker Compose", "Compose Specification (V2)", "Orchestrates multi-container networking, dependencies, persistent volume mounting, and container health checks."),
+        ("Linux Swap Space", "512 MiB Virtual Swap (/swapfile)", "Augments physical RAM of Free-Tier EC2 instance, preventing Out-Of-Memory (OOM) build failures.")
     ]
     t_aws = doc.add_table(rows=len(aws_table_data), cols=3)
     t_aws.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -329,23 +337,24 @@ def create_word_report():
     add_h1("6. Database Schema & BCNF Normalization")
     doc.add_paragraph(
         "The persistence tier is built upon a rigorously structured 13-table relational schema designed to satisfy Boyce-Codd Normal Form (BCNF). "
-        "Every non-trivial functional dependency X -> Y has X as a superkey, completely eliminating data insertion, update, and deletion anomalies."
+        "A relation R is in BCNF if and only if for every non-trivial functional dependency X -> Y, X is a superkey of R. "
+        "This design systematically eliminates insertion, update, and deletion anomalies."
     )
     bcnf_data = [
         ("#", "Relation Name", "Attributes", "Key Functional Dependencies & Role"),
-        ("1", "ZipCode", "Pin_no, City, State", "Pin_no -> City, State (BCNF Location decomposition)"),
-        ("2", "Guest", "G_ID, First_Name, Last_Name, DOB, Gender, Mob_No", "G_ID -> All attributes; Mob_No unique constraint"),
-        ("3", "Employee", "E_ID, First_Name, Last_Name, Salary, Sex, Mob_No, Pin_no", "E_ID -> All attributes; FK to ZipCode"),
-        ("4", "Room", "R_ID, Room_No, Type, Capacity, Price_Per_Night, Status", "R_ID -> All attributes; Status: Available/Occupied"),
-        ("5", "Manager", "E_ID, Dept_Managed, Allowance", "E_ID -> Dept_Managed, Allowance; 1:1 FK to Employee"),
-        ("6", "Housekeeper", "E_ID, Shift, Overtime_Hours", "E_ID -> Shift, Overtime_Hours; 1:1 FK to Employee"),
-        ("7", "Receptionist", "E_ID, Counter_No, Languages", "E_ID -> Counter_No, Languages; 1:1 FK to Employee"),
-        ("8", "Booking_Record", "Booking_ID, Check_In, Check_Out, Total_Amount, G_ID, R_ID", "Booking_ID -> All; FK to Guest(G_ID) and Room(R_ID)"),
-        ("9", "Bill", "B_ID, Amount, Payment_Method, Payment_Date, Status, Booking_ID", "B_ID -> All; FK to Booking_Record(Booking_ID)"),
-        ("10", "Records", "Record_no, Type, Date_Logged, Description", "Record_no -> All; Operational audit logging"),
-        ("11", "Housekeeper_Room", "E_ID, R_ID", "Composite PK; Tracks room maintenance assignments"),
-        ("12", "Guest_Manager", "G_ID, E_ID", "Composite PK; VIP guest to executive manager mapping"),
-        ("13", "Receptionist_Records", "E_ID, Record_no", "Composite PK; Staff audit logging operations")
+        ("1", "ZipCode", "Pin_no, City, State", "Pin_no -> City, State (BCNF decomposition eliminating transitive dependency from Employee)"),
+        ("2", "Guest", "G_ID, First_Name, Last_Name, DOB, Gender, Mob_No", "G_ID -> All attributes; Candidate Key: Mob_No -> G_ID (both superkeys)"),
+        ("3", "Employee", "E_ID, First_Name, Last_Name, Salary, Sex, Mob_No, Pin_no", "E_ID -> All attributes; Foreign Key to ZipCode(Pin_no)"),
+        ("4", "Room", "R_ID, Room_No, Type, Capacity, Price_Per_Night, Status", "R_ID -> All attributes; Status CHECK (Available, Occupied)"),
+        ("5", "Manager", "E_ID, Dept_Managed, Allowance", "E_ID -> Dept_Managed, Allowance; 1:1 Specialization FK to Employee"),
+        ("6", "Housekeeper", "E_ID, Shift, Overtime_Hours", "E_ID -> Shift, Overtime_Hours; 1:1 Specialization FK to Employee"),
+        ("7", "Receptionist", "E_ID, Counter_No, Languages", "E_ID -> Counter_No, Languages; 1:1 Specialization FK to Employee"),
+        ("8", "Booking_Record", "Booking_ID, Check_In, Check_Out, Total_Amount, G_ID, R_ID, Booking_Type, Status", "Booking_ID -> All; FK to Guest(G_ID) and Room(R_ID); temporal amount snapshot"),
+        ("9", "Bill", "B_ID, Amount, Payment_Method, Payment_Date, Status, Booking_ID", "B_ID -> All; FK to Booking_Record(Booking_ID); Status: Unpaid/Paid"),
+        ("10", "Records", "Record_no, Type, Date_Logged, Description", "Record_no -> All; Operational audit logging entity"),
+        ("11", "Housekeeper_Room", "E_ID, R_ID", "(E_ID, R_ID) -> All; M:N relationship junction table"),
+        ("12", "Guest_Manager", "G_ID, E_ID", "(G_ID, E_ID) -> All; VIP guest executive assignment junction table"),
+        ("13", "Receptionist_Records", "E_ID, Record_no", "(E_ID, Record_no) -> All; Audit trail junction table")
     ]
     t_bcnf = doc.add_table(rows=len(bcnf_data), cols=4)
     t_bcnf.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -365,15 +374,35 @@ def create_word_report():
                     set_cell_background(cell, "F9F9F9")
                 p.runs[0].font.size = Pt(9.5)
 
+    doc.add_paragraph()
+    add_h2("BCNF Decomposition & Functional Dependency Analysis")
+    doc.add_paragraph(
+        "1. Elimination of Transitive Dependencies via ZipCode: In standard staff management tables, storing City and State alongside Employee would introduce the dependency "
+        "E_ID -> Pin_no and Pin_no -> City, State, violating BCNF because Pin_no is not a superkey of Employee. By decomposing this into a dedicated ZipCode(Pin_no, City, State) "
+        "relation where Pin_no is the primary key (and superkey), the schema satisfies BCNF.\n\n"
+        "2. Justification of Total_Amount in Booking_Record (Temporal Immutability): Relational purity might suggest that Total_Amount is a derived attribute "
+        "(Price_Per_Night * Nights). However, in enterprise hospitality management, storing Total_Amount upon booking creation is a deliberate, standardized temporal snapshot pattern. "
+        "Hotel room tariffs (Price_Per_Night in Room) change frequently due to seasonality, promotions, and inflation. If Total_Amount were dynamically derived from the current Room table, "
+        "any tariff update would retroactively alter past financial receipts, violating accounting integrity. Under temporal functional dependencies, Total_Amount is determined uniquely by "
+        "the booking transaction at that specific point in time: Booking_ID -> Total_Amount. Since Booking_ID is the candidate key and superkey, BCNF is strictly preserved.\n\n"
+        "3. Single-Inheritance Specialization: Role tables (Manager, Housekeeper, Receptionist) share primary key E_ID with Employee. The functional dependency E_ID -> attributes holds with "
+        "E_ID being the unique primary key, adhering to BCNF.\n\n"
+        "4. Junction Relations: Tables Housekeeper_Room, Guest_Manager, and Receptionist_Records possess composite keys with no non-key attributes or dependencies other than the full key, "
+        "satisfying BCNF trivially."
+    )
+
+    doc.add_page_break()
+
     # ==================== 7. APPLICATION FEATURES ====================
     add_h1("7. Application Features")
     features = [
-        "7.1 Real-Time Analytics & Live Status: Operator details (Pranav Jahagirdar • Reception) and live health badge (DB: UP) dynamically reflecting MySQL connectivity.",
-        "7.2 Guest Management & Profiling: Transactional data entry module supporting guest insertion with regex validation for contact numbers (10–15 digits) and date formats.",
-        "7.3 Room Inventory & Availability: Room categorization (Single, Double, Deluxe, Suite) with nightly tariffs and real-time status (Available, Occupied).",
-        "7.4 Multi-Table Filtered Retrieval: Interactive search view executing real-time WHERE filtering across arrival dates, room types, booking channels, and guest names, featuring live SQL query display.",
-        "7.5 Billing & Invoicing Settlement: Invoice generation tied to reservations with financial tracking for amounts and payment statuses (Paid, Pending).",
-        "7.6 System Health Diagnostic: Dedicated /api/health endpoint verifying live JDBC database pool connectivity and reporting HTTP 200 JSON status."
+        "7.1 Real-Time System Status & Header: Operator identification (Pranav Jahagirdar • Reception) and live health badge (DB: UP) dynamically reflecting MySQL connectivity over JDBC.",
+        "7.2 Guest Registration & Contact Validation: Form module supporting guest insertion with format constraints for 10–15 digit contact numbers, date of birth, and gender.",
+        "7.3 Room Inventory Management: Room creation form supporting room types (Single, Double, Deluxe, Suite), capacity specification, nightly tariffs, and initial availability.",
+        "7.4 Reservation & Booking Allocation: Form module linking registered guests and rooms with booking types (Walk-in, Online, Phone, Agent) and reservation statuses (Confirmed, Checked-in, Pending).",
+        "7.5 Billing & Invoicing Settlement: Add Bill form linking financial settlement to guests and active bookings with amount input and status tracking (Unpaid / Paid).",
+        "7.6 Multi-Table Filtered Retrieval: Interactive search tab executing multi-criteria WHERE queries against the vw_booking_details SQL view, supporting arrival date, room type, booking type, and status filtering with live SQL syntax display.",
+        "7.7 Diagnostic Health Endpoint: Dedicated /api/health endpoint verifying live JDBC database pool connectivity and reporting HTTP 200 JSON payload."
     ]
     for feat in features:
         p = doc.add_paragraph(style='List Bullet')
@@ -391,21 +420,21 @@ def create_word_report():
     add_h2("8.1 Application Header & Live Health Status")
     doc.add_paragraph(
         "The application header displays the operator identity, active role, and live MySQL database connectivity status (DB: UP). "
-        "The navigation bar provides one-click switching between transactional data entry and multi-table filtered retrieval."
+        "The navigation bar provides one-click switching between transactional data entry ('1. Enter Details') and multi-table filtered retrieval ('2. Retrieve / Search')."
     )
     add_figure("images/figure_8_2_guests.png", "Figure 8.1 — Application Header & Navigation: Operator details (Pranav Jahagirdar • Reception) and live health indicator (DB: UP).")
 
     add_h2("8.2 Guest & Room Management (Enter Details View)")
     doc.add_paragraph(
         "The Guest and Room management interface provides transactional forms to insert new entities into the normalized BCNF schema. "
-        "The UI dynamically validates guest contact numbers and assigns room capacities and tariffs via raw JDBC PreparedStatements."
+        "The UI validates guest contact numbers and assigns room capacities and tariffs via raw JDBC PreparedStatements."
     )
     add_figure("images/figure_8_2_guests.png", "Figure 8.2 — Data Entry Module: Transactional forms for Guest, Room, and Booking insertion into MySQL with active DB status indicator (DB: UP).")
 
     add_h2("8.3 Room & Booking Allocation Form")
     doc.add_paragraph(
         "The Room and Booking forms allow front-desk receptionists to allocate available rooms to registered guests, specify booking channels "
-        "(Walk-in, Online, Phone), and track confirmation status."
+        "(Walk-in, Online, Phone, Agent), and set initial reservation status."
     )
     add_figure("images/figure_8_5_bills_bookings.png", "Figure 8.3 — Room Inventory & Reservation Forms: Dynamic room type selection and booking creation cards.")
 
@@ -418,17 +447,17 @@ def create_word_report():
 
     add_h2("8.5 Billing & Invoicing Form")
     doc.add_paragraph(
-        "The Billing module enables front-desk staff to generate itemized invoices linked via foreign key to active Booking_ID records, "
-        "specifying billing amounts and tracking payment settlement."
+        "The Billing module enables front-desk staff to generate invoices linked via foreign key to registered guests and active bookings, "
+        "specifying billing amounts and tracking payment status (Unpaid / Paid)."
     )
-    add_figure("images/figure_8_5_bills_bookings.png", "Figure 8.5 — Billing Management: Add Bill form linking payments to guest and booking entities.")
+    add_figure("images/figure_8_5_bills_bookings.png", "Figure 8.5 — Billing Management: Add Bill form linking payments to guest and booking entities with Unpaid status.")
 
     add_h2("8.6 System Health Check Endpoint")
     doc.add_paragraph(
-        "The diagnostic API endpoint (/api/health) verifies live end-to-end database connectivity, returning a JSON payload confirming status: UP "
+        "The diagnostic API endpoint (/api/health) verifies live end-to-end database connectivity through the Nginx reverse proxy, returning a JSON payload confirming status: UP "
         "and the target database hotel_management."
     )
-    add_figure("images/figure_8_6_health_check.png", "Figure 8.6 — Health Check Verification: JSON response from the Java backend confirming active MySQL connection over Port 80.")
+    add_figure("images/figure_8_6_health_check.png", "Figure 8.6 — Health Check Verification: JSON response from the Java backend confirming active MySQL connection over Port 80 via Nginx reverse proxy.")
 
     doc.add_page_break()
 
@@ -437,10 +466,11 @@ def create_word_report():
 
     add_h2("9.1 Amazon EC2 Instance — Running Status")
     doc.add_paragraph(
-        "The EC2 console demonstrates that the Ubuntu virtual instance is active in the Running state with system status checks passing (2/2 checks), "
-        "assigned a public IPv4 address (15.206.165.236), and residing in the ap-south-1 region."
+        "The EC2 console demonstrates that the Ubuntu virtual instance (Instance ID: i-0601e61a67c089561, Name: hotel-management-server) is active "
+        "in the Running state with status checks Initializing (captured during the initial instance boot sequence prior to 2/2 checks completion), "
+        "assigned a public IPv4 address (15.206.165.236), and residing in the ap-south-1b Availability Zone."
     )
-    add_figure("images/figure_9_1_ec2_running.png", "Figure 9.1 — Amazon EC2 Management Console: Virtual server (t3.micro, i-0601e61a67c089561) in Running state with public IP 15.206.165.236.")
+    add_figure("images/figure_9_1_ec2_running.png", "Figure 9.1 — Amazon EC2 Management Console: Virtual server (t3.micro, i-0601e61a67c089561) in Running state (Status check: Initializing) with public IP 15.206.165.236.")
 
     add_h2("9.2 EC2 Instance Configuration Details")
     doc.add_paragraph(
@@ -451,21 +481,32 @@ def create_word_report():
 
     add_h2("9.3 EC2 Security Group Inbound & Outbound Rules")
     doc.add_paragraph(
-        "The Security Group acts as an enterprise firewall. Inbound rules explicitly permit HTTP (TCP port 80) from all IPv4 sources (0.0.0.0/0) "
-        "and SSH (TCP port 22) for administration."
+        "The Security Group (launch-wizard-1, sg-05c58f0544aeeeb4d) acts as an enterprise firewall controlling ingress traffic to the host. "
+        "As shown in Figure 9.3, the inbound rules specify:\n"
+        "• HTTP (TCP Port 80, 0.0.0.0/0): Allows public web traffic to reach the Nginx reverse proxy.\n"
+        "• SSH (TCP Port 22, 0.0.0.0/0): Allows administrative console access via EC2 Instance Connect.\n"
+        "• MS SQL (TCP Port 1433, 0.0.0.0/0): An inactive firewall rule carried over from the initial launch wizard template selection before the Ubuntu AMI was finalized. "
+        "Because no SQL Server process listens on port 1433, this rule represents an inert firewall entry that can be pruned in production hardening.\n"
+        "Crucially, host ports 8080 (backend) and 3306 (MySQL) are completely omitted from the Security Group inbound rules, ensuring that public internet clients "
+        "cannot directly connect to the backend or database microservices."
     )
-    add_figure("images/figure_9_3_security_group.png", "Figure 9.3 — Security Group Configuration: Inbound firewall rules enforcing HTTP (Port 80) and SSH (Port 22) access.")
+    add_figure("images/figure_9_3_security_group.png", "Figure 9.3 — Security Group Configuration: Inbound firewall rules showing HTTP (Port 80), SSH (Port 22), and template-inherited MS SQL (Port 1433).")
 
     add_h2("9.4 Docker Multi-Container Orchestration Status")
     doc.add_paragraph(
-        "Executing sudo docker compose ps within the EC2 terminal verifies that all three isolated container services (hotel_frontend, hotel_backend, "
-        "and hotel_db) are running and healthy."
+        "Executing sudo docker compose ps within the EC2 terminal verifies that all three container services are active and healthy:\n"
+        "• hotel_frontend: Nginx web server bound to host port 80 (0.0.0.0:80->80/tcp).\n"
+        "• hotel_backend: Java 17 REST API bound to host port 8080 (0.0.0.0:8080->8080/tcp) for local host diagnostics, shielded from the public internet by the Security Group.\n"
+        "• hotel_db: MySQL 8.0 bound strictly to host loopback (127.0.0.1:3306->3306/tcp, healthy), completely preventing external remote connections."
     )
-    add_figure("images/figure_9_4_docker_ps.png", "Figure 9.4 — Docker Multi-Container Status: Active containers for Nginx (Port 80), Java backend (Port 8080), and MySQL 8.0 (healthy).")
+    add_figure("images/figure_9_4_docker_ps.png", "Figure 9.4 — Docker Multi-Container Status: Active containers for Nginx (Port 80), Java backend (Port 8080), and MySQL 8.0 (127.0.0.1:3306, healthy).")
 
     add_h2("9.5 MySQL Database Container & BCNF Schema Verification")
     doc.add_paragraph(
-        "Terminal execution inside the MySQL container showing the result of SHOW TABLES; and verification of the 13 BCNF tables and 2 views within the hotel_management database schema."
+        "Terminal execution inside the MySQL container showing the result of SHOW TABLES; and verification of all 13 BCNF tables and 2 SQL views within the hotel_management database schema.\n\n"
+        "Security Note on Development Credentials: In Figure 9.5, the parameter -prootpassword123 is supplied directly in the CLI command for immediate schema verification during testing. "
+        "In an enterprise cloud production environment, best practices dictate abstracting credentials using AWS Secrets Manager or AWS Systems Manager Parameter Store, "
+        "injecting credentials dynamically at runtime via IAM roles rather than passing them on the command line."
     )
     add_figure("images/figure_9_5_mysql_tables.png", "Figure 9.5 — MySQL Schema Verification: Terminal execution confirming all 13 BCNF relational tables and 2 SQL views in hotel_management.")
 
@@ -478,35 +519,41 @@ def create_word_report():
 
     add_h2("9.7 Java Backend REST API Execution Logs")
     doc.add_paragraph(
-        "Terminal output of sudo docker compose logs backend showing the Java 17 application boot sequence, dynamic environment variable loading (DB_URL, PORT), "
-        "and successful database handshake."
+        "Terminal output of sudo docker compose logs --tail=25 backend showing the Java 17 application boot sequence, dynamic environment variable loading (DB_URL, PORT), "
+        "and successful database handshake (✓ DB connection OK) followed by HTTP endpoint registration."
     )
     add_figure("images/figure_9_7_backend_logs.png", "Figure 9.7 — Backend Runtime Logs: Java 17 API startup, successful database connection (✓ DB connection OK), and route registration.")
 
     add_h2("9.8 Amazon CloudWatch System Performance Metrics")
     doc.add_paragraph(
-        "CloudWatch dashboard graphs illustrating real-time CPU Utilization (typically < 21%), Network In/Out traffic bytes, and Disk Read/Write operations on the EC2 host during live application testing."
+        "Figure 9.8 displays the Amazon EC2 integrated Monitoring dashboard, which captures real-time Amazon CloudWatch basic telemetry metrics for the hotel-management-server instance over a 1-hour window. The graphs illustrate:\n"
+        "• CPU utilization (%): Operational peaks up to 21.23% during Docker image unpacking and build phases, stabilizing near ~0% at idle.\n"
+        "• Network in (bytes): Ingress throughput peaking at 162.4 MB during base container image downloads (MySQL, Corretto, Alpine) and npm package resolution.\n"
+        "• Network out (bytes): Egress throughput peaking at 916.5 KB during client HTTP web asset delivery.\n"
+        "• Network packets in (count): Telemetry peaking at ~110.65K packets during build and package installation.\n"
+        "• Network packets out (count): Telemetry peaking at ~3.81K packets for outbound HTTP responses.\n"
+        "• CPU credit usage and CPU credit balance (count): Burstable T3 credit balance maintained at ~0.72 credits with credit usage peaking at 2.15 credits."
     )
-    add_figure("images/figure_9_8_cloudwatch_metrics.png", "Figure 9.8 — Amazon CloudWatch Monitoring: Real-time CPU utilization (< 21%), network throughput, and packet count telemetry for hotel-management-server.")
+    add_figure("images/figure_9_8_cloudwatch_metrics.png", "Figure 9.8 — EC2 Integrated CloudWatch Telemetry: Real-time CPU utilization (peak 21.23%), network ingress/egress bytes, packet counts, and T3 CPU credit telemetry.")
 
     doc.add_page_break()
 
     # ==================== 10. TEST CASES ====================
     add_h1("10. Test Cases and Results")
     test_cases_data = [
-        ("Test ID", "Module", "Test Scenario & Inputs", "Expected Result", "Actual Result", "Status"),
-        ("TC-01", "Guest Mgmt", "Register a guest with valid attributes and 10-digit mobile (9876543210).", "Guest inserted into MySQL; auto G_ID assigned; UI updates.", "Record created; visible in guest list; HTTP 201 response.", "PASS"),
-        ("TC-02", "Guest Validation", "Attempt to register guest with invalid mobile (12345 or letters).", "Server CHECK constraint or client validation blocks insertion.", "Submission rejected; alert shown; no DB write.", "PASS"),
-        ("TC-03", "Room Inventory", "Toggle 'Available Only' room filter on Room Management page.", "Queries /api/rooms?available=true; displays available rooms.", "Occupied rooms excluded; only available rooms rendered.", "PASS"),
-        ("TC-04", "Booking Creation", "Create booking with valid G_ID, available R_ID, and dates.", "Booking_Record inserted; cost computed; room status Occupied.", "Booking registered; room status toggled to Occupied.", "PASS"),
-        ("TC-05", "View Query", "Query /api/bookings?detailed to verify vw_booking_details view.", "Returns unified JSON records containing joined Guest, Room, Dates.", "View successfully queried; full joined metadata returned.", "PASS"),
-        ("TC-06", "Billing Settlement", "Generate bill for active booking with method UPI and status Paid.", "Record written to Bill table; linked via FK to Booking_ID.", "Invoice generated and displayed; amount matches.", "PASS"),
-        ("TC-07", "Relational Delete", "Delete guest with dependent bookings to test ON DELETE CASCADE.", "Deletion cascades to remove associated Booking_Record and Bill.", "Foreign key cascade triggered; dependent bookings pruned.", "PASS"),
-        ("TC-08", "Diagnostic Health", "Send HTTP GET request to /api/health.", "JSON response {\"status\":\"UP\",\"db\":\"hotel_management\"}.", "HTTP 200 OK received; connection verified.", "PASS"),
-        ("TC-09", "Nginx Proxy", "Access backend API externally via http://<EC2-IP>/api/guests on Port 80.", "Nginx proxies request to internal port 8080 without CORS.", "Guests JSON returned without CORS errors.", "PASS"),
-        ("TC-10", "SPA Fallback", "Refresh browser on a non-root route (e.g. /retrieve).", "Nginx try_files rule serves index.html; React handles route.", "Page refreshes correctly; React state preserved.", "PASS"),
-        ("TC-11", "Container Resilience", "Manually terminate backend container via docker stop hotel_backend.", "Docker Compose restart policy (unless-stopped) restarts service.", "Container restarted within 5s; health recovers.", "PASS"),
-        ("TC-12", "Database Persistence", "Restart all containers via docker compose down && docker compose up -d.", "MySQL data volume (db_data) retains all created entities.", "Data fully intact after full restart; volume verified.", "PASS")
+        ("Test ID", "Module", "Test Scenario & Inputs", "Expected Result", "Actual Result & Photographic Evidence", "Status"),
+        ("TC-01", "Guest Registration", "Submit Add Guest form with First Name, Last Name, DOB, Gender, and 10-digit mobile.", "Guest inserted into MySQL; auto G_ID assigned; UI refreshes.", "Record created; visible in database and results view. (Verified in Figure 8.2 & 8.4)", "PASS"),
+        ("TC-02", "Guest Validation", "Attempt to register guest with invalid mobile (less than 10 digits).", "HTML5 regex constraint pattern prevents form submission.", "Submission blocked by browser validation; no DB write occurred. (Verified in UI form constraints)", "PASS"),
+        ("TC-03", "Room Inventory", "Submit Add Room form with Type: Single, Capacity: 1, Price: 1500, Availability: Available.", "Room entity inserted into Room table; initial availability set.", "Room saved successfully; ready for reservation allocation. (Verified in Figure 8.2)", "PASS"),
+        ("TC-04", "Booking Allocation", "Create booking linking registered Guest and Room with Walk-in type and Confirmed status.", "Booking_Record inserted with temporal amount snapshot; linked via FK.", "Booking created successfully; visible in Retrieve / Search table. (Verified in Figure 8.2 & 8.4)", "PASS"),
+        ("TC-05", "Relational View Query", "Execute search on '2. Retrieve / Search' tab against vw_booking_details with filter criteria.", "Unified JSON records returned joining Guest, Room, Dates, and Status.", "View queried live; results table renders joined records with SQL preview. (Verified in Figure 8.4)", "PASS"),
+        ("TC-06", "Billing Settlement", "Submit Add Bill form linking Guest and active Booking with Amount and Status: Unpaid.", "Invoice record inserted into Bill table with foreign key linkage.", "Bill saved successfully with Unpaid status; linked to guest. (Verified in Figure 8.5)", "PASS"),
+        ("TC-07", "Diagnostic Health", "Send HTTP GET request to /api/health over public IP on Port 80.", "JSON response returned: {\"status\":\"UP\",\"db\":\"hotel_management\"}.", "HTTP 200 OK received with UP status confirming JDBC database pool. (Verified in Figure 8.6)", "PASS"),
+        ("TC-08", "Nginx Reverse Proxy", "Access web application via public IPv4 (http://15.206.165.236/) without port specification.", "Nginx routes port 80 to React frontend and proxies /api/* internally.", "Web application loads seamlessly; live health status shows DB: UP. (Verified in Figure 9.6)", "PASS"),
+        ("TC-09", "Container Orchestration", "Execute sudo docker compose ps on EC2 host to verify container health.", "Frontend, backend, and db containers active with db reported healthy.", "All 3 containers active; db healthy; ports mapped correctly. (Verified in Figure 9.4)", "PASS"),
+        ("TC-10", "Schema Verification", "Execute SHOW TABLES; inside MySQL container via Docker CLI.", "13 BCNF relational tables and 2 SQL views listed in hotel_management schema.", "All 13 tables and 2 views verified present and correctly named. (Verified in Figure 9.5)", "PASS"),
+        ("TC-11", "Backend Boot & Logs", "Inspect backend runtime output via sudo docker compose logs backend.", "Java 17 HTTP server boots on port 8080; DB connection established.", "Logs confirm startup and '✓ DB connection OK' message. (Verified in Figure 9.7)", "PASS"),
+        ("TC-12", "Host Telemetry", "Monitor compute and network metrics in EC2 Console integrated CloudWatch monitoring.", "Telemetry shows CPU utilization peak at 21.23% and network ingress of 162.4MB.", "Metrics captured in CloudWatch graphs confirming stable resource utilization. (Verified in Figure 9.8)", "PASS")
     ]
     t_tc = doc.add_table(rows=len(test_cases_data), cols=6)
     t_tc.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -539,7 +586,7 @@ def create_word_report():
         "Academic & Architectural Rigor: The database strictly adheres to Boyce-Codd Normal Form (BCNF) across 13 tables, guaranteeing complete referential integrity, eliminating data redundancy, and optimizing read operations via relational SQL views.",
         "Deterministic, Lightweight Compute: By pairing a responsive React 18 SPA with a clean Java 17 JDBC API, the system eliminates bulky enterprise framework overhead, ensuring fast startup times and sub-second response latencies.",
         "Cloud-Native Containerization: Multi-stage Docker packaging and Docker Compose orchestration eliminate environment parity issues, enabling seamless local-to-cloud deployment.",
-        "Network & Operational Security: Nginx reverse proxying isolates backend microservices and database ports from public exposure, eliminating CORS errors and centralizing HTTP routing on port 80.",
+        "Network & Operational Security: Nginx reverse proxying acts as the public entry point on Port 80, eliminating CORS errors and shielding backend microservices and database ports behind the AWS Security Group firewall.",
         "Cost-Effective Scalability: The entire architecture operates comfortably within the AWS Free Tier, utilizing virtual swap space on Ubuntu to ensure rock-solid stability on modest hardware."
     ]
     for cp in concl_points:
@@ -559,7 +606,7 @@ def create_word_report():
         "[4] Oracle Corporation, 'MySQL 8.0 Reference Manual — Optimization, Views, and InnoDB Storage Engine,' 2024. [Online]. Available: https://dev.mysql.com/doc/refman/8.0/en/",
         "[5] Oracle Corporation, 'Java SE 17 Documentation & JDBC 4.3 Specification,' 2024. [Online]. Available: https://docs.oracle.com/en/java/javase/17/",
         "[6] Nginx Inc., 'Nginx Reverse Proxy & HTTP Load Balancing Documentation,' 2024. [Online]. Available: https://nginx.org/en/docs/http/ngx_http_proxy_module.html",
-        "[7] Docker Inc., 'Docker Compose File Version 3 Reference & Multi-Stage Builds,' Docker Docs, 2024. [Online]. Available: https://docs.docker.com/compose/",
+        "[7] Docker Inc., 'Docker Compose Specification & Multi-Stage Builds,' Docker Docs, 2024. [Online]. Available: https://docs.docker.com/compose/",
         "[8] Meta Platforms, 'React 18 Documentation — Concurrent Rendering and Hooks,' 2024. [Online]. Available: https://react.dev/",
         "[9] A. Silberschatz, H. F. Korth, and S. Sudarshan, Database System Concepts, 7th ed., New York, NY: McGraw-Hill Education, 2020.",
         "[10] R. Elmasri and S. B. Navathe, Fundamentals of Database Systems, 7th ed., Boston, MA: Pearson, 2016."
@@ -576,4 +623,3 @@ def create_word_report():
 
 if __name__ == "__main__":
     create_word_report()
-

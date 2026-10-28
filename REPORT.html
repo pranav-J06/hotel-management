@@ -81,18 +81,18 @@
 
     h2 {
       font-size: 13.5pt;
-      margin-top: 28px;
-      margin-bottom: 12px;
+      border-bottom: 2px solid #e2e8f0;
       padding-bottom: 6px;
-      border-bottom: 1.5px solid #e2e8f0;
+      margin-top: 32px;
+      margin-bottom: 14px;
       color: #1e3a8a;
     }
 
     h3 {
       font-size: 11pt;
-      margin-top: 18px;
+      margin-top: 20px;
       margin-bottom: 8px;
-      color: #334155;
+      color: #0369a1;
     }
 
     p {
@@ -109,14 +109,20 @@
       margin-bottom: 6px;
     }
 
-    code, pre {
+    code {
       font-family: 'JetBrains Mono', monospace;
       font-size: 9pt;
+      background: #f1f5f9;
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: #0f766e;
     }
 
     pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
       background: #0f172a;
-      color: #e2e8f0;
+      color: #f8fafc;
       padding: 14px;
       border-radius: 6px;
       overflow-x: auto;
@@ -126,30 +132,30 @@
 
     /* Cover Page */
     .cover-page {
-      text-align: center;
-      padding: 40px 10px 60px 10px;
-      min-height: 85vh;
+      min-height: 90vh;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 10px;
     }
 
     .cover-header {
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
 
     .cover-title {
-      font-size: 22pt;
+      font-family: 'Inter', sans-serif;
+      font-size: 24pt;
       font-weight: 800;
       color: #1e3a8a;
+      line-height: 1.25;
       margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     .cover-subtitle {
       font-family: 'Inter', sans-serif;
-      font-size: 13pt;
+      font-size: 12.5pt;
       font-weight: 500;
       color: #475569;
       margin-bottom: 25px;
@@ -170,7 +176,7 @@
     .details-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 40px 0;
+      margin: 30px 0;
       font-family: 'Inter', sans-serif;
       font-size: 10pt;
     }
@@ -229,49 +235,6 @@
       font-size: 8.5pt;
     }
 
-    /* Screenshot Placeholders */
-    .screenshot-box {
-      border: 2px dashed #94a3b8;
-      background: #f8fafc;
-      border-radius: 8px;
-      padding: 30px 20px;
-      margin: 14px 0 6px 0;
-      text-align: center;
-      transition: all 0.2s ease;
-      min-height: 180px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .screenshot-box:hover {
-      border-color: #3b82f6;
-      background: #f0f7ff;
-    }
-
-    .screenshot-icon {
-      font-size: 26pt;
-      margin-bottom: 6px;
-      color: #64748b;
-    }
-
-    .screenshot-title {
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: 10pt;
-      color: #1e3a8a;
-      margin-bottom: 4px;
-    }
-
-    .screenshot-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 8.5pt;
-      color: #64748b;
-      max-width: 500px;
-      line-height: 1.4;
-    }
-
     .figure-caption {
       font-family: 'Inter', sans-serif;
       font-size: 8.5pt;
@@ -279,6 +242,16 @@
       color: #475569;
       text-align: center;
       margin-bottom: 22px;
+    }
+
+    /* Callout Note */
+    .callout-note {
+      background: #f8fafc;
+      border-left: 4px solid #0284c7;
+      padding: 10px 14px;
+      margin: 12px 0;
+      font-size: 9.5pt;
+      color: #334155;
     }
 
     /* Print action bar */
@@ -336,7 +309,7 @@
       <div class="cover-header">
         <div class="cover-tag">DA3 CAD PROJECT REPORT</div>
         <div class="cover-title">HotelStay Management System</div>
-        <div class="cover-subtitle">Design, Implementation, and AWS Cloud Deployment of a BCNF-Normalized Full-Stack Platform</div>
+        <div class="cover-subtitle">Cloud-Native Hotel Management System Using AWS Cloud Resources and BCNF Relational Architecture</div>
       </div>
 
       <div>
@@ -387,13 +360,13 @@
     <!-- ==================== 1. ABSTRACT ==================== -->
     <h2>1. Abstract</h2>
     <p>
-      This report details the architectural design, implementation, and cloud deployment of <strong>HotelStay</strong>, a full-stack, cloud-native Hotel Management System developed as the DA3 project at Vellore Institute of Technology, Chennai. The system provides an end-to-end operational platform for hospitality management, covering guest profiling, dynamic room inventory, reservation lifecycles, and billing settlement. The application is architectured as a multi-tier solution deployed on an <strong>Amazon Elastic Compute Cloud (Amazon EC2)</strong> virtual server running Ubuntu Linux.
+      This report details the architectural design, implementation, and cloud deployment of <strong>HotelStay</strong>, a full-stack, cloud-native Hotel Management System developed as the DA3 project at Vellore Institute of Technology, Chennai. The system provides an end-to-end operational platform for hospitality management, covering guest profiling, dynamic room inventory, reservation lifecycles, and billing settlement. The application is architectured as a multi-tier solution deployed on an <strong>Amazon Elastic Compute Cloud (Amazon EC2)</strong> virtual server running Ubuntu Linux in the <code>ap-south-1</code> (Mumbai) region.
     </p>
     <p>
-      The frontend presentation tier is built with <strong>React 18</strong> and bundled using Vite, served through a high-performance <strong>Nginx</strong> web server that acts as a reverse proxy on HTTP port 80. The application tier comprises a custom <strong>Java 17 REST API server</strong> utilizing raw Java Database Connectivity (JDBC) with parameterized queries for deterministic, high-throughput execution without enterprise framework overhead. The persistence tier is powered by <strong>MySQL 8.0</strong>, adhering strictly to <strong>Boyce-Codd Normal Form (BCNF)</strong> across 13 relational entities, reinforced with foreign key referential integrity, domain constraints (<code>CHECK</code>), cascading updates/deletes, and relational database views (<code>vw_booking_details</code>).
+      The frontend presentation tier is built with <strong>React 18</strong> and bundled using Vite, served through a high-performance <strong>Nginx</strong> web server acting as a reverse proxy on HTTP port 80. The application tier comprises a custom <strong>Java 17 REST API server</strong> utilizing raw Java Database Connectivity (JDBC) with parameterized queries for deterministic, high-throughput execution without enterprise framework overhead. The persistence tier is powered by <strong>MySQL 8.0</strong>, adhering strictly to <strong>Boyce-Codd Normal Form (BCNF)</strong> across 13 relational entities, reinforced with foreign key referential integrity, domain constraints (<code>CHECK</code>), cascading actions, and relational database views (<code>vw_booking_details</code>).
     </p>
     <p>
-      All tiers are orchestrated using <strong>Docker and Docker Compose</strong>, isolating database and backend communication within an internal container network, eliminating Cross-Origin Resource Sharing (CORS) vulnerabilities. Operational resilience is ensured on AWS Free-Tier compute through an automated 2GB virtual memory swap configuration and <strong>Amazon CloudWatch</strong> performance monitoring.
+      All tiers are containerized and orchestrated using Docker and Docker Compose. Nginx acts as the single public gateway on port 80, eliminating Cross-Origin Resource Sharing (CORS) complexity and proxying API traffic internally to the backend. Operational resilience on AWS Free-Tier compute is ensured through an automated 512MB virtual memory swap configuration and integrated Amazon CloudWatch telemetry monitoring.
     </p>
 
     <!-- ==================== 2. INTRODUCTION ==================== -->
@@ -405,7 +378,7 @@
       Cloud computing provides a compelling solution by offering on-demand compute elasticity, automated networking, managed storage, and pay-as-you-go economics. This project bridges rigorous academic relational database design with modern cloud engineering by deploying an enterprise-grade Hotel Management System on <strong>Amazon Web Services (AWS)</strong>.
     </p>
     <p>
-      The core database design enforces complete Boyce-Codd Normal Form (BCNF) normalization to eliminate data insertion, update, and deletion anomalies. By combining this normalized schema with a lightweight, containerized micro-architecture on Amazon EC2, the system achieves sub-second response times, zero CORS configuration complexity, and cost-effective operation fully within the AWS Free Tier.
+      The core database design enforces Boyce-Codd Normal Form (BCNF) normalization to eliminate data insertion, update, and deletion anomalies. By combining this normalized schema with a lightweight, containerized micro-architecture on Amazon EC2, the system achieves responsive sub-second page rendering, zero CORS configuration complexity, and cost-effective operation within the AWS Free Tier.
     </p>
 
     <!-- ==================== 3. OBJECTIVES AND SCOPE ==================== -->
@@ -414,11 +387,11 @@
       <li><strong>Relational Schema Rigor:</strong> Design and implement a robust 13-table relational schema fully normalized to <strong>Boyce-Codd Normal Form (BCNF)</strong>, complete with primary keys, composite keys, foreign keys with referential actions (<code>CASCADE</code>, <code>SET NULL</code>), <code>CHECK</code> constraints, and optimized SQL Views (<code>vw_booking_details</code>).</li>
       <li><strong>High-Performance Application Core:</strong> Develop a Java 17 backend utilizing standard HTTP server libraries (<code>com.sun.net.httpserver.HttpServer</code>) and JDBC <code>PreparedStatement</code> to ensure SQL injection immunity and minimal memory footprint.</li>
       <li><strong>Responsive Presentation Layer:</strong> Construct an interactive Single-Page Application (SPA) using React 18 and modern CSS styling to deliver intuitive workflows for hotel managers and reception staff.</li>
-      <li><strong>Cloud Infrastructure Deployment:</strong> Provision an <strong>Amazon EC2 (t2.micro / t3.micro)</strong> virtual machine running Ubuntu Linux in the AWS Asia Pacific (Mumbai) region (<code>ap-south-1</code>).</li>
-      <li><strong>Containerized Multi-Tier Orchestration:</strong> Containerize the React frontend, Java backend, and MySQL database using multi-stage <code>Dockerfile</code> definitions and orchestrate their lifecycle via <code>docker-compose.yml</code>.</li>
+      <li><strong>Cloud Infrastructure Deployment:</strong> Provision an <strong>Amazon EC2 (t3.micro)</strong> virtual machine running Ubuntu Linux in the AWS Asia Pacific (Mumbai) region (<code>ap-south-1</code>).</li>
+      <li><strong>Containerized Multi-Tier Orchestration:</strong> Containerize the React frontend, Java backend, and MySQL database using multi-stage <code>Dockerfile</code> definitions and orchestrate their lifecycle via Docker Compose.</li>
       <li><strong>Network Security & Reverse Proxying:</strong> Configure <strong>Nginx</strong> on port 80 to serve static client assets and securely proxy <code>/api/*</code> requests to the internal Java backend, eliminating CORS issues and shielding internal microservices from direct public internet exposure.</li>
-      <li><strong>Cloud Cost & Resource Optimization:</strong> Enact a 2GB virtual swap configuration on Ubuntu to ensure smooth compilation and container execution on resource-constrained Free-Tier instances without out-of-memory (OOM) failures.</li>
-      <li><strong>Cloud Observability:</strong> Monitor CPU utilization, network traffic, and system logs through <strong>Amazon CloudWatch</strong> and container health checks.</li>
+      <li><strong>Cloud Cost & Resource Optimization:</strong> Enact a 512MB virtual swap configuration on Ubuntu to ensure smooth compilation and container execution on resource-constrained Free-Tier instances without out-of-memory (OOM) failures.</li>
+      <li><strong>Cloud Observability:</strong> Monitor CPU utilization, network traffic, and system logs through integrated Amazon CloudWatch telemetry and container health checks.</li>
     </ul>
 
     <div class="page-break"></div>
@@ -426,7 +399,7 @@
     <!-- ==================== 4. SYSTEM ARCHITECTURE ==================== -->
     <h2>4. System Architecture</h2>
     <p>
-      The application implements a decoupled, three-tier cloud architecture hosted on an Amazon EC2 virtual server. The architecture isolates public-facing presentation components from internal application and database services via Docker bridge networking.
+      The application implements a decoupled, three-tier cloud architecture hosted on an Amazon EC2 virtual server (<code>t3.micro</code>). The architecture separates public-facing presentation components from internal application and database services through container network abstraction and AWS security group firewalls.
     </p>
 
     <pre>
@@ -435,43 +408,37 @@
 |                      (HTTP Port 80 / Public IPv4 Address)                         |
 +-----------------------------------------------------------------------------------+
                                           |
-                                          | HTTP (Port 80)
+                                          | Inbound TCP Port 80 (Allowed by AWS SG)
                                           v
 +-----------------------------------------------------------------------------------+
-|                        AMAZON EC2 INSTANCE (Ubuntu Linux)                         |
-|   Security Group: Inbound Port 80 (0.0.0.0/0), Port 22 (Admin SSH)                |
+|                          AMAZON EC2 VIRTUAL HOST                                  |
+|            (Ubuntu 24.04 LTS | t3.micro | Public IP: 15.206.165.236)              |
+|                                                                                   |
+|  AWS Security Group: launch-wizard-1 (Inbound: Port 80 HTTP, Port 22 SSH)         |
+|  [Port 8080 & Port 3306 BLOCKED from public internet ingress]                     |
 |                                                                                   |
 |  +-----------------------------------------------------------------------------+  |
-|  |                 TIER 1: PRESENTATION & REVERSE PROXY LAYER                  |  |
-|  |  [Nginx Container (Port 80)]                                                |  |
-|  |   - Serves React 18 SPA Production Bundle (/usr/share/nginx/html)           |  |
-|  |   - SPA Fallback: try_files $uri $uri/ /index.html                          |  |
-|  |   - Gzip Compression & Static Asset Caching                                 |  |
-|  |   - Reverse Proxy: location /api/ -> http://backend:8080/api/               |  |
-|  +-----------------------------------------------------------------------------+  |
-|                                          |                                        |
-|                          Internal Docker Bridge Network                           |
-|                                          v                                        |
-|  +-----------------------------------------------------------------------------+  |
-|  |                        TIER 2: APPLICATION LOGIC LAYER                      |  |
-|  |  [Java 17 REST API Container (Port 8080)]                                   |  |
-|  |   - HttpServer listening on 0.0.0.0:8080                                    |  |
-|  |   - Dynamic Cloud Config: DB_URL, DB_USER, DB_PASSWORD, PORT                |  |
-|  |   - Resilient Connection Retry Loop (10 retries on cold boot)               |  |
-|  |   - Handlers: Guest, Room, Booking, Employee, Bill, Health                  |  |
-|  |   - Data Serialization: Google Gson                                         |  |
-|  +-----------------------------------------------------------------------------+  |
-|                                          |                                        |
-|                        JDBC PreparedStatement Queries                             |
-|                                          v                                        |
-|  +-----------------------------------------------------------------------------+  |
-|  |                           TIER 3: PERSISTENCE LAYER                         |  |
-|  |  [MySQL 8.0 Database Container (Port 3306 Internal)]                        |  |
-|  |   - 13 BCNF-Normalized Relational Tables                                    |  |
-|  |   - Relational Views: vw_booking_details, vw_employee_details               |  |
-|  |   - Automated Initialization: /docker-entrypoint-initdb.d (schema + seed)   |  |
-|  |   - Persistent Storage: Named Docker Volume (db_data)                       |  |
-|  +-----------------------------------------------------------------------------+  |
+|  |                     DOCKER BRIDGE NETWORK (app_default)                     |  |
+|  |                                                                             |  |
+|  |  +------------------------+             +--------------------------------+  |  |
+|  |  |   hotel_frontend       |             |   hotel_backend                |  |  |
+|  |  |   (Nginx Web Server)   | --proxy---> |   (Java 17 JDBC REST API)      |  |  |
+|  |  |   Exposed: 0.0.0.0:80  | /api/*      |   Published: 0.0.0.0:8080      |  |  |
+|  |  |   Static React SPA     |             |   (Protected by Host SG)       |  |  |
+|  |  +------------------------+             +--------------------------------+  |  |
+|  |                                                         |                   |  |
+|  |                                                         | JDBC Connection   |  |
+|  |                                                         v (db:3306)         |  |
+|  |                                         +--------------------------------+  |  |
+|  |                                         |   hotel_db                     |  |  |
+|  |                                         |   (MySQL 8.0 BCNF Schema)      |  |  |
+|  |                                         |   Bound: 127.0.0.1:3306        |  |  |
+|  |                                         |   (Loopback Only)              |  |  |
+|  |                                         +--------------------------------+  |  |
+|  |                                                         |                   |  |
+|  +---------------------------------------------------------|-------------------+  |
+|                                                            v                      |
+|                                            Persistent Named Volume (db_data)      |
 +-----------------------------------------------------------------------------------+
     </pre>
 
@@ -481,7 +448,7 @@
           <th>Tier</th>
           <th>Component</th>
           <th>Technology</th>
-          <th>Responsibilities</th>
+          <th>Responsibilities & Network Exposure</th>
         </tr>
       </thead>
       <tbody>
@@ -489,28 +456,36 @@
           <td><strong>Presentation</strong></td>
           <td>Web Server & Client SPA</td>
           <td>React 18, Vite, Nginx, Alpine Linux</td>
-          <td>Delivers responsive UI; manages client routing; proxies <code>/api/*</code> requests to backend container; handles gzip compression.</td>
+          <td>Serves client SPA on HTTP Port 80; reverse-proxies <code>/api/*</code> requests to backend container; handles gzip compression. Publicly exposed to <code>0.0.0.0/0</code>.</td>
         </tr>
         <tr>
           <td><strong>Application</strong></td>
           <td>REST API Microservice</td>
-          <td>Java 17 (Temurin JRE), JDBC, Gson</td>
-          <td>Executes business logic; handles HTTP endpoints; coordinates database transactions; performs input sanitization.</td>
+          <td>Java 17 (Amazon Corretto), JDBC, Gson</td>
+          <td>Executes business logic and JDBC queries; bound to host port 8080 for direct container diagnostics, but shielded from external internet ingress by the AWS Security Group.</td>
         </tr>
         <tr>
           <td><strong>Persistence</strong></td>
           <td>Relational Database</td>
           <td>MySQL 8.0, InnoDB, utf8mb4</td>
-          <td>Enforces referential integrity; maintains transactional ACID guarantees; runs BCNF relations, views, and indexes.</td>
+          <td>Maintains transactional ACID guarantees; enforces BCNF relations, views, and indexes. Bound exclusively to <code>127.0.0.1</code> (loopback), completely inaccessible to public internet.</td>
         </tr>
         <tr>
           <td><strong>Infrastructure</strong></td>
           <td>Compute & Host</td>
-          <td>AWS EC2 (t2/t3.micro), Ubuntu 22.04 LTS</td>
-          <td>Virtual server host; provides Linux kernel namespaces; maintains 2GB swap space; enforces AWS Security Group firewall.</td>
+          <td>AWS EC2 (t3.micro), Ubuntu 24.04 LTS</td>
+          <td>Virtual server host; provides Linux kernel namespaces; maintains 512MB swap space; enforces AWS Security Group firewall perimeter.</td>
         </tr>
       </tbody>
     </table>
+
+    <div class="callout-note">
+      <strong>Network Ingress & Defense-in-Depth Model:</strong><br>
+      1. External traffic enters exclusively through standard HTTP Port 80 managed by Nginx.<br>
+      2. Nginx routes client requests for <code>/</code> to static assets and proxies <code>/api/*</code> internally to <code>hotel_backend:8080</code>.<br>
+      3. While host port 8080 is published for developer diagnosis on the EC2 machine, the external AWS Security Group (<code>launch-wizard-1</code>) does not permit port 8080 inbound from the internet.<br>
+      4. MySQL is bound strictly to the host loopback interface (<code>127.0.0.1:3306</code>), ensuring that external network packets cannot reach the persistence layer directly.
+    </div>
 
     <!-- ==================== 5. AWS SERVICES USED ==================== -->
     <h2>5. AWS Services & Infrastructure Components Used</h2>
@@ -525,43 +500,43 @@
       <tbody>
         <tr>
           <td><strong>Amazon EC2</strong></td>
-          <td><code>t2.micro</code> / <code>t3.micro</code> (Ubuntu 22.04 LTS)</td>
-          <td>Provides scalable virtual compute host for running all containerized services within the AWS Free Tier.</td>
+          <td><code>t3.micro</code> (Ubuntu 24.04 LTS)</td>
+          <td>Scalable virtual compute host for running containerized services within the AWS Free Tier (<code>ap-south-1</code>).</td>
         </tr>
         <tr>
           <td><strong>Amazon VPC</strong></td>
           <td>Default VPC (<code>ap-south-1</code>)</td>
-          <td>Provides logical network isolation, public subnets, and routing table configuration for the host instance.</td>
+          <td>Logical network isolation, public subnets (<code>subnet-0ccec48796ac7db5d</code>), and internet gateway routing.</td>
         </tr>
         <tr>
           <td><strong>Security Groups</strong></td>
-          <td><code>hotel-management-sg</code></td>
-          <td>Acts as a virtual firewall: allows inbound HTTP (Port 80) from <code>0.0.0.0/0</code> and SSH (Port 22) for administration.</td>
+          <td><code>launch-wizard-1</code> (<code>sg-05c58f0544aeeeb4d</code>)</td>
+          <td>Stateful virtual firewall: permits inbound HTTP (Port 80) and SSH (Port 22); includes inherited Port 1433 rule from initial launch template.</td>
         </tr>
         <tr>
           <td><strong>Amazon EBS</strong></td>
           <td>8 GiB General Purpose SSD (<code>gp3</code>)</td>
-          <td>Provides persistent block-level root storage for the OS, container images, and MySQL database volume.</td>
+          <td>Persistent block-level root storage for the OS, container images, and MySQL database named volume (<code>db_data</code>).</td>
         </tr>
         <tr>
           <td><strong>Amazon CloudWatch</strong></td>
-          <td>EC2 System Metrics (<code>AWS/EC2</code>)</td>
-          <td>Real-time monitoring of CPU utilization, network traffic (bytes in/out), and disk operations at 1-minute granularity.</td>
+          <td>EC2 Console Monitoring (<code>AWS/EC2</code>)</td>
+          <td>Integrated telemetry tracking CPU utilization (%), network in/out throughput, packet counts, and T3 CPU burst credit consumption.</td>
         </tr>
         <tr>
           <td><strong>Docker Engine</strong></td>
-          <td>Docker Community Edition v26+</td>
-          <td>Provides lightweight, isolated runtime environments for the frontend, backend, and database containers.</td>
+          <td>Docker Community Edition v27+</td>
+          <td>Lightweight, isolated runtime environments for the frontend, backend, and database containers.</td>
         </tr>
         <tr>
           <td><strong>Docker Compose</strong></td>
-          <td>Compose Specification v3.8</td>
+          <td>Compose Specification (V2)</td>
           <td>Orchestrates multi-container networking, dependencies (<code>depends_on</code>), persistent volume mounting, and health checks.</td>
         </tr>
         <tr>
           <td><strong>Linux Swap Space</strong></td>
-          <td>2 GiB Virtual Swap (<code>/swapfile</code>)</td>
-          <td>Augments the 1 GiB physical RAM of Free-Tier EC2 instances, preventing Out-Of-Memory (OOM) compilation aborts.</td>
+          <td>512 MiB Virtual Swap (<code>/swapfile</code>)</td>
+          <td>Augments physical RAM of Free-Tier EC2 instance, preventing Out-Of-Memory (OOM) build failures.</td>
         </tr>
       </tbody>
     </table>
@@ -571,7 +546,7 @@
     <!-- ==================== 6. DATABASE SCHEMA & BCNF ==================== -->
     <h2>6. Database Schema & BCNF Normalization</h2>
     <p>
-      The persistence tier is built upon a rigorously structured 13-table relational schema designed to satisfy <strong>Boyce-Codd Normal Form (BCNF)</strong>. Every non-trivial functional dependency $X \rightarrow Y$ has $X$ as a superkey.
+      The persistence tier is built upon a rigorously structured 13-table relational schema designed to satisfy <strong>Boyce-Codd Normal Form (BCNF)</strong>. A relation $R$ is in BCNF if and only if for every non-trivial functional dependency $X \rightarrow Y$, $X$ is a superkey of $R$. This design systematically eliminates insertion, update, and deletion anomalies.
     </p>
 
     <table class="data-table">
@@ -584,31 +559,48 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>1</td><td><strong>ZipCode</strong></td><td><u>Pin_no</u>, City, State</td><td>Pin_no &rarr; City, State (BCNF Location decomposition)</td></tr>
-        <tr><td>2</td><td><strong>Guest</strong></td><td><u>G_ID</u>, First_Name, Last_Name, DOB, Gender, Mob_No</td><td>G_ID &rarr; All attributes; Mob_No unique constraint</td></tr>
-        <tr><td>3</td><td><strong>Employee</strong></td><td><u>E_ID</u>, First_Name, Last_Name, Salary, Sex, Mob_No, Pin_no</td><td>E_ID &rarr; All attributes; FK to ZipCode</td></tr>
-        <tr><td>4</td><td><strong>Room</strong></td><td><u>R_ID</u>, Room_No, Type, Capacity, Price_Per_Night, Status</td><td>R_ID &rarr; All attributes; Status: Available/Occupied</td></tr>
-        <tr><td>5</td><td><strong>Manager</strong></td><td><u>E_ID</u>, Dept_Managed, Allowance</td><td>E_ID &rarr; Dept_Managed, Allowance; 1:1 FK to Employee</td></tr>
-        <tr><td>6</td><td><strong>Housekeeper</strong></td><td><u>E_ID</u>, Shift, Overtime_Hours</td><td>E_ID &rarr; Shift, Overtime_Hours; 1:1 FK to Employee</td></tr>
-        <tr><td>7</td><td><strong>Receptionist</strong></td><td><u>E_ID</u>, Counter_No, Languages</td><td>E_ID &rarr; Counter_No, Languages; 1:1 FK to Employee</td></tr>
-        <tr><td>8</td><td><strong>Booking_Record</strong></td><td><u>Booking_ID</u>, Check_In, Check_Out, Total_Amount, G_ID, R_ID</td><td>Booking_ID &rarr; All; FK to Guest(G_ID) and Room(R_ID)</td></tr>
-        <tr><td>9</td><td><strong>Bill</strong></td><td><u>B_ID</u>, Amount, Payment_Method, Payment_Date, Status, Booking_ID</td><td>B_ID &rarr; All; FK to Booking_Record(Booking_ID)</td></tr>
-        <tr><td>10</td><td><strong>Records</strong></td><td><u>Record_no</u>, Type, Date_Logged, Description</td><td>Record_no &rarr; All; Operational audit logging</td></tr>
-        <tr><td>11</td><td><strong>Housekeeper_Room</strong></td><td><u>E_ID</u>, <u>R_ID</u></td><td>Composite PK; Tracks room maintenance assignments</td></tr>
-        <tr><td>12</td><td><strong>Guest_Manager</strong></td><td><u>G_ID</u>, <u>E_ID</u></td><td>Composite PK; VIP guest to executive manager mapping</td></tr>
-        <tr><td>13</td><td><strong>Receptionist_Records</strong></td><td><u>E_ID</u>, <u>Record_no</u></td><td>Composite PK; Staff audit logging operations</td></tr>
+        <tr><td>1</td><td><strong>ZipCode</strong></td><td><u>Pin_no</u>, City, State</td><td>Pin_no &rarr; City, State (BCNF decomposition eliminating transitive dependency from Employee)</td></tr>
+        <tr><td>2</td><td><strong>Guest</strong></td><td><u>G_ID</u>, First_Name, Last_Name, DOB, Gender, Mob_No</td><td>G_ID &rarr; All attributes; Candidate Key: Mob_No &rarr; G_ID (both superkeys)</td></tr>
+        <tr><td>3</td><td><strong>Employee</strong></td><td><u>E_ID</u>, First_Name, Last_Name, Salary, Sex, Mob_No, Pin_no</td><td>E_ID &rarr; All attributes; Foreign Key to ZipCode(Pin_no)</td></tr>
+        <tr><td>4</td><td><strong>Room</strong></td><td><u>R_ID</u>, Room_No, Type, Capacity, Price_Per_Night, Status</td><td>R_ID &rarr; All attributes; Status CHECK (Available, Occupied)</td></tr>
+        <tr><td>5</td><td><strong>Manager</strong></td><td><u>E_ID</u>, Dept_Managed, Allowance</td><td>E_ID &rarr; Dept_Managed, Allowance; 1:1 Specialization FK to Employee</td></tr>
+        <tr><td>6</td><td><strong>Housekeeper</strong></td><td><u>E_ID</u>, Shift, Overtime_Hours</td><td>E_ID &rarr; Shift, Overtime_Hours; 1:1 Specialization FK to Employee</td></tr>
+        <tr><td>7</td><td><strong>Receptionist</strong></td><td><u>E_ID</u>, Counter_No, Languages</td><td>E_ID &rarr; Counter_No, Languages; 1:1 Specialization FK to Employee</td></tr>
+        <tr><td>8</td><td><strong>Booking_Record</strong></td><td><u>Booking_ID</u>, Check_In, Check_Out, Total_Amount, G_ID, R_ID, Booking_Type, Status</td><td>Booking_ID &rarr; All; FK to Guest(G_ID) and Room(R_ID); temporal amount snapshot</td></tr>
+        <tr><td>9</td><td><strong>Bill</strong></td><td><u>B_ID</u>, Amount, Payment_Method, Payment_Date, Status, Booking_ID</td><td>B_ID &rarr; All; FK to Booking_Record(Booking_ID); Status: Unpaid/Paid</td></tr>
+        <tr><td>10</td><td><strong>Records</strong></td><td><u>Record_no</u>, Type, Date_Logged, Description</td><td>Record_no &rarr; All; Operational audit logging entity</td></tr>
+        <tr><td>11</td><td><strong>Housekeeper_Room</strong></td><td><u>E_ID</u>, <u>R_ID</u></td><td>(E_ID, R_ID) &rarr; All; M:N relationship junction table</td></tr>
+        <tr><td>12</td><td><strong>Guest_Manager</strong></td><td><u>G_ID</u>, <u>E_ID</u></td><td>(G_ID, E_ID) &rarr; All; VIP guest executive assignment junction table</td></tr>
+        <tr><td>13</td><td><strong>Receptionist_Records</strong></td><td><u>E_ID</u>, <u>Record_no</u></td><td>(E_ID, Record_no) &rarr; All; Audit trail junction table</td></tr>
       </tbody>
     </table>
+
+    <h3>BCNF Decomposition & Functional Dependency Analysis</h3>
+    <p>
+      <strong>1. Elimination of Transitive Dependencies via ZipCode:</strong> In standard staff management tables, storing City and State alongside Employee introduces the dependency $E\_ID \rightarrow Pin\_no$ and $Pin\_no \rightarrow City, State$, violating BCNF because $Pin\_no$ is not a superkey of Employee. By decomposing this into a dedicated <code>ZipCode(Pin_no, City, State)</code> relation where $Pin\_no$ is the primary key (and superkey), the schema satisfies BCNF.
+    </p>
+    <p>
+      <strong>2. Justification of Total_Amount in Booking_Record (Temporal Immutability):</strong> Relational purity might suggest that <code>Total_Amount</code> is a derived attribute ($Price\_Per\_Night \times Nights$). However, in enterprise hospitality management, storing <code>Total_Amount</code> upon booking creation is a deliberate, standardized <strong>temporal snapshot pattern</strong>. Hotel room tariffs (<code>Price_Per_Night</code> in <code>Room</code>) change frequently due to seasonality, promotions, and inflation. If <code>Total_Amount</code> were dynamically derived from the current Room table, any tariff update would retroactively alter past financial receipts, violating accounting integrity. Under temporal functional dependencies, <code>Total_Amount</code> is determined uniquely by the booking transaction at that specific point in time: $Booking\_ID \rightarrow Total\_Amount$. Since $Booking\_ID$ is the candidate key and superkey, BCNF is strictly preserved.
+    </p>
+    <p>
+      <strong>3. Single-Inheritance Specialization:</strong> Role tables (<code>Manager</code>, <code>Housekeeper</code>, <code>Receptionist</code>) share primary key $E\_ID$ with <code>Employee</code>. The functional dependency $E\_ID \rightarrow attributes$ holds with $E\_ID$ being the unique primary key, adhering to BCNF.
+    </p>
+    <p>
+      <strong>4. Junction Relations:</strong> Tables <code>Housekeeper_Room</code>, <code>Guest_Manager</code>, and <code>Receptionist_Records</code> possess composite keys with no non-key attributes or dependencies other than the full key, satisfying BCNF trivially.
+    </p>
+
+    <div class="page-break"></div>
 
     <!-- ==================== 7. APPLICATION FEATURES ==================== -->
     <h2>7. Application Features</h2>
     <ul>
-      <li><strong>7.1 Real-Time Analytics Dashboard:</strong> Live counters for Total Guests, Total Rooms, Available Rooms, and Active Bookings calculated directly via SQL aggregate queries. Live health badge reflects backend database availability.</li>
-      <li><strong>7.2 Guest Management & Profiling:</strong> Full CRUD operations for guest records. Enforces regex validation on mobile numbers (10–15 digits) and date formats before database persistence.</li>
-      <li><strong>7.3 Room Inventory & Live Availability:</strong> Room catalog tracking tariffs, room types (Single, Double, Suite, Deluxe), and occupancy. Includes a 1-click filter for available rooms.</li>
-      <li><strong>7.4 Booking Engine & Reservation Lifecycle:</strong> Dynamic guest and room dropdowns, date picker logic, automatic bill rate calculations, and automatic room status updates from <code>Available</code> to <code>Occupied</code>. Utilizes <code>vw_booking_details</code> for unified multi-table views.</li>
-      <li><strong>7.5 Billing, Invoicing & Settlement:</strong> Invoicing tied to reservations supporting multiple payment methods (UPI, Credit Card, Cash, Debit Card) and statuses (Paid, Pending).</li>
-      <li><strong>7.6 System Health Diagnostic:</strong> Dedicated <code>/api/health</code> endpoint returning JSON health indicators confirming active JDBC database connectivity.</li>
+      <li><strong>7.1 Real-Time System Status & Header:</strong> Operator identification (<code>Pranav Jahagirdar • Reception</code>) and live health badge (<code>DB: UP</code>) dynamically reflecting MySQL connectivity over JDBC.</li>
+      <li><strong>7.2 Guest Registration & Contact Validation:</strong> Form module supporting guest insertion with format constraints for 10–15 digit contact numbers, date of birth, and gender.</li>
+      <li><strong>7.3 Room Inventory Management:</strong> Room creation form supporting room types (Single, Double, Deluxe, Suite), capacity specification, nightly tariffs, and initial availability.</li>
+      <li><strong>7.4 Reservation & Booking Allocation:</strong> Form module linking registered guests and rooms with booking types (Walk-in, Online, Phone, Agent) and reservation statuses (Confirmed, Checked-in, Pending).</li>
+      <li><strong>7.5 Billing & Invoicing Settlement:</strong> Add Bill form linking financial settlement to guests and active bookings with amount input and status tracking (Unpaid / Paid).</li>
+      <li><strong>7.6 Multi-Table Filtered Retrieval:</strong> Interactive search tab executing multi-criteria WHERE queries against the <code>vw_booking_details</code> SQL view, supporting arrival date, room type, booking type, and status filtering with live SQL syntax display.</li>
+      <li><strong>7.7 Diagnostic Health Endpoint:</strong> Dedicated <code>/api/health</code> endpoint verifying live JDBC database pool connectivity and reporting HTTP 200 JSON payload.</li>
     </ul>
 
     <div class="page-break"></div>
@@ -618,7 +610,7 @@
 
     <h3>8.1 Application Header & Live Health Status</h3>
     <p>
-      The application header displays the operator identity, active role, and live MySQL database connectivity status (<code>DB: UP</code>). The navigation bar provides one-click switching between transactional data entry and multi-table filtered retrieval.
+      The application header displays the operator identity, active role, and live MySQL database connectivity status (<code>DB: UP</code>). The navigation bar provides one-click switching between transactional data entry (<code>1. Enter Details</code>) and multi-table filtered retrieval (<code>2. Retrieve / Search</code>).
     </p>
     <div style="text-align: center; margin: 15px 0;">
       <img src="images/figure_8_2_guests.png" alt="Figure 8.1 - Application Header & Data Entry" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
@@ -627,7 +619,7 @@
 
     <h3>8.2 Guest & Room Management (Enter Details View)</h3>
     <p>
-      The Guest and Room management interface provides transactional forms to insert new entities into the normalized BCNF schema. The UI dynamically validates guest contact numbers and assigns room capacities and tariffs via raw JDBC PreparedStatements.
+      The Guest and Room management interface provides transactional forms to insert new entities into the normalized BCNF schema. The UI validates guest contact numbers and assigns room capacities and tariffs via raw JDBC PreparedStatements.
     </p>
     <div style="text-align: center; margin: 15px 0;">
       <img src="images/figure_8_2_guests.png" alt="Figure 8.2 - Enter Details View" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
@@ -636,7 +628,7 @@
 
     <h3>8.3 Room & Booking Allocation Form</h3>
     <p>
-      The Room and Booking forms allow front-desk receptionists to allocate available rooms to registered guests, specify booking channels (Walk-in, Online, Phone), and track confirmation status.
+      The Room and Booking forms allow front-desk receptionists to allocate available rooms to registered guests, specify booking channels (Walk-in, Online, Phone, Agent), and set initial reservation status.
     </p>
     <div style="text-align: center; margin: 15px 0;">
       <img src="images/figure_8_5_bills_bookings.png" alt="Figure 8.3 - Room and Booking Allocation" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
@@ -656,21 +648,21 @@
 
     <h3>8.5 Billing & Invoicing Form</h3>
     <p>
-      The Billing module enables front-desk staff to generate itemized invoices linked via foreign key to active <code>Booking_ID</code> records, specifying billing amounts and tracking payment settlement.
+      The Billing module enables front-desk staff to generate invoices linked via foreign key to registered guests and active bookings, specifying billing amounts and tracking payment status (Unpaid / Paid).
     </p>
     <div style="text-align: center; margin: 15px 0;">
       <img src="images/figure_8_5_bills_bookings.png" alt="Figure 8.5 - Billing and Invoicing Form" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 8.5 — Billing Management: Add Bill form linking payments to guest and booking entities.</div>
+    <div class="figure-caption">Figure 8.5 — Billing Management: Add Bill form linking payments to guest and booking entities with Unpaid status.</div>
 
     <h3>8.6 System Health Check Endpoint</h3>
     <p>
-      The diagnostic API endpoint (<code>/api/health</code>) verifies live end-to-end database connectivity, returning a JSON payload confirming <code>status: UP</code> and the target database <code>hotel_management</code>.
+      The diagnostic API endpoint (<code>/api/health</code>) verifies live end-to-end database connectivity through the Nginx reverse proxy, returning a JSON payload confirming <code>status: UP</code> and the target database <code>hotel_management</code>.
     </p>
     <div style="text-align: center; margin: 15px 0;">
       <img src="images/figure_8_6_health_check.png" alt="Figure 8.6 - System Health Check JSON" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 8.6 — Health Check Verification: JSON response from the Java backend confirming active MySQL connection over Port 80.</div>
+    <div class="figure-caption">Figure 8.6 — Health Check Verification: JSON response from the Java backend confirming active MySQL connection over Port 80 via Nginx reverse proxy.</div>
 
     <div class="page-break"></div>
 
@@ -679,12 +671,12 @@
 
     <h3>9.1 Amazon EC2 Instance — Running Status</h3>
     <p>
-      The EC2 console demonstrates that the Ubuntu virtual instance is active in the <strong>Running</strong> state with system status checks passing (2/2 checks), assigned a public IPv4 address, and residing in the <code>ap-south-1</code> region.
+      The EC2 console demonstrates that the Ubuntu virtual instance (Instance ID: <code>i-0601e61a67c089561</code>, Name: <code>hotel-management-server</code>) is active in the <strong>Running</strong> state with status checks <strong>Initializing</strong> (captured during the initial instance boot sequence prior to 2/2 checks completion), assigned a public IPv4 address (<code>15.206.165.236</code>), and residing in the <code>ap-south-1b</code> Availability Zone.
     </p>
     <div style="text-align: center; margin: 15px 0;">
       <img src="images/figure_9_1_ec2_running.png" alt="Figure 9.1 - EC2 Running Status" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.1 — Amazon EC2 Management Console: Virtual server (t3.micro, i-0601e61a67c089561) in Running state with public IP 15.206.165.236.</div>
+    <div class="figure-caption">Figure 9.1 — Amazon EC2 Management Console: Virtual server (t3.micro, i-0601e61a67c089561) in Running state (Status check: Initializing) with public IP 15.206.165.236.</div>
 
     <h3>9.2 EC2 Instance Configuration Details</h3>
     <p>
@@ -697,28 +689,44 @@
 
     <h3>9.3 EC2 Security Group Inbound & Outbound Rules</h3>
     <p>
-      The Security Group acts as an enterprise firewall. Inbound rules explicitly permit <strong>HTTP (TCP port 80)</strong> from all IPv4 sources (<code>0.0.0.0/0</code>) and <strong>SSH (TCP port 22)</strong> for administration.
+      The Security Group (<code>launch-wizard-1</code>, <code>sg-05c58f0544aeeeb4d</code>) acts as an enterprise firewall controlling ingress traffic to the host. As shown in Figure 9.3, the inbound rules specify:
+    </p>
+    <ul>
+      <li><strong>HTTP (TCP Port 80, 0.0.0.0/0):</strong> Allows public web traffic to reach the Nginx reverse proxy.</li>
+      <li><strong>SSH (TCP Port 22, 0.0.0.0/0):</strong> Allows administrative console access via EC2 Instance Connect.</li>
+      <li><strong>MS SQL (TCP Port 1433, 0.0.0.0/0):</strong> An inactive firewall rule carried over from the initial launch wizard template selection before the Ubuntu AMI was finalized. Because no SQL Server process listens on port 1433, this rule represents an inert firewall entry that can be pruned in production hardening.</li>
+    </ul>
+    <p>
+      Crucially, host ports 8080 (backend) and 3306 (MySQL) are completely omitted from the Security Group inbound rules, ensuring that public internet clients cannot directly connect to the backend or database microservices.
     </p>
     <div style="text-align: center; margin: 15px 0;">
       <img src="images/figure_9_3_security_group.png" alt="Figure 9.3 - Security Group Inbound Rules" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.3 — Security Group Configuration: Inbound firewall rules enforcing HTTP (Port 80) and SSH (Port 22) access.</div>
+    <div class="figure-caption">Figure 9.3 — Security Group Configuration: Inbound firewall rules showing HTTP (Port 80), SSH (Port 22), and template-inherited MS SQL (Port 1433).</div>
 
     <div class="page-break"></div>
 
     <h3>9.4 Docker Multi-Container Orchestration Status</h3>
     <p>
-      Executing <code>sudo docker compose ps</code> within the EC2 terminal verifies that all three isolated container services (<code>hotel_frontend</code>, <code>hotel_backend</code>, and <code>hotel_db</code>) are running and healthy.
+      Executing <code>sudo docker compose ps</code> within the EC2 terminal verifies that all three container services are active and healthy:
     </p>
+    <ul>
+      <li><code>hotel_frontend</code>: Nginx web server bound to host port 80 (<code>0.0.0.0:80->80/tcp</code>).</li>
+      <li><code>hotel_backend</code>: Java 17 REST API bound to host port 8080 (<code>0.0.0.0:8080->8080/tcp</code>) for local host diagnostics, shielded from the public internet by the Security Group.</li>
+      <li><code>hotel_db</code>: MySQL 8.0 bound strictly to host loopback (<code>127.0.0.1:3306->3306/tcp</code>, healthy), completely preventing external remote connections.</li>
+    </ul>
     <div style="text-align: center; margin: 15px 0;">
       <img src="images/figure_9_4_docker_ps.png" alt="Figure 9.4 - Docker Multi-Container Status" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.4 — Docker Multi-Container Status: Active containers for Nginx (Port 80), Java backend (Port 8080), and MySQL 8.0 (healthy).</div>
+    <div class="figure-caption">Figure 9.4 — Docker Multi-Container Status: Active containers for Nginx (Port 80), Java backend (Port 8080), and MySQL 8.0 (127.0.0.1:3306, healthy).</div>
 
     <h3>9.5 MySQL Database Container & BCNF Schema Verification</h3>
     <p>
-      Terminal execution inside the MySQL container showing the result of <code>SHOW TABLES;</code> and verification of the 13 BCNF tables and 2 views within the <code>hotel_management</code> database schema.
+      Terminal execution inside the MySQL container showing the result of <code>SHOW TABLES;</code> and verification of all 13 BCNF tables and 2 SQL views within the <code>hotel_management</code> database schema.
     </p>
+    <div class="callout-note">
+      <strong>Security Note on Development Credentials:</strong> In Figure 9.5, the parameter <code>-prootpassword123</code> is supplied directly in the CLI command for immediate schema verification during testing. In an enterprise cloud production environment, best practices dictate abstracting credentials using AWS Secrets Manager or AWS Systems Manager Parameter Store, injecting credentials dynamically at runtime via IAM roles rather than passing them on the command line.
+    </div>
     <div style="text-align: center; margin: 15px 0;">
       <img src="images/figure_9_5_mysql_tables.png" alt="Figure 9.5 - MySQL 13 BCNF Tables" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
@@ -737,7 +745,7 @@
 
     <h3>9.7 Java Backend REST API Execution Logs</h3>
     <p>
-      Terminal output of <code>sudo docker compose logs backend</code> showing the Java 17 application boot sequence, dynamic environment variable loading (<code>DB_URL</code>, <code>PORT</code>), and successful database handshake.
+      Terminal output of <code>sudo docker compose logs --tail=25 backend</code> showing the Java 17 application boot sequence, dynamic environment variable loading (<code>DB_URL</code>, <code>PORT</code>), and successful database handshake (<code>✓ DB connection OK</code>) followed by HTTP endpoint registration.
     </p>
     <div style="text-align: center; margin: 15px 0;">
       <img src="images/figure_9_7_backend_logs.png" alt="Figure 9.7 - Java Backend Runtime Logs" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
@@ -746,12 +754,20 @@
 
     <h3>9.8 Amazon CloudWatch System Performance Metrics</h3>
     <p>
-      CloudWatch dashboard graphs illustrating real-time CPU Utilization (typically &lt; 5%), Network In/Out traffic bytes, and Disk Read/Write operations on the EC2 host during live application testing.
+      Figure 9.8 displays the Amazon EC2 integrated Monitoring dashboard, which captures real-time Amazon CloudWatch basic telemetry metrics for the <code>hotel-management-server</code> instance over a 1-hour window. The graphs illustrate:
     </p>
+    <ul>
+      <li><strong>CPU utilization (%):</strong> Operational peaks up to 21.23% during Docker image unpacking and build phases, stabilizing near ~0% at idle.</li>
+      <li><strong>Network in (bytes):</strong> Ingress throughput peaking at 162.4 MB during base container image downloads (MySQL, Corretto, Alpine) and npm package resolution.</li>
+      <li><strong>Network out (bytes):</strong> Egress throughput peaking at 916.5 KB during client HTTP web asset delivery.</li>
+      <li><strong>Network packets in (count):</strong> Telemetry peaking at ~110.65K packets during build and package installation.</li>
+      <li><strong>Network packets out (count):</strong> Telemetry peaking at ~3.81K packets for outbound HTTP responses.</li>
+      <li><strong>CPU credit usage and CPU credit balance (count):</strong> Burstable T3 credit balance maintained at ~0.72 credits with credit usage peaking at 2.15 credits.</li>
+    </ul>
     <div style="text-align: center; margin: 15px 0;">
       <img src="images/figure_9_8_cloudwatch_metrics.png" alt="Figure 9.8 - Amazon CloudWatch Performance Metrics" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
     </div>
-    <div class="figure-caption">Figure 9.8 — Amazon CloudWatch Monitoring: Real-time CPU utilization (&lt; 21%), network throughput, and packet count telemetry for hotel-management-server.</div>
+    <div class="figure-caption">Figure 9.8 — EC2 Integrated CloudWatch Telemetry: Real-time CPU utilization (peak 21.23%), network ingress/egress bytes, packet counts, and T3 CPU credit telemetry.</div>
 
     <div class="page-break"></div>
 
@@ -764,105 +780,105 @@
           <th>Module</th>
           <th>Test Scenario & Inputs</th>
           <th>Expected Result</th>
-          <th>Actual Result</th>
+          <th>Actual Result & Photographic Evidence</th>
           <th>Status</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>TC-01</strong></td>
-          <td>Guest Management</td>
-          <td>Register a guest with valid attributes and a 10-digit mobile number (<code>9876543210</code>).</td>
-          <td>Guest inserted into MySQL <code>Guest</code> table; auto-incremented <code>G_ID</code> assigned; UI updates.</td>
-          <td>Record created; visible in guest list with assigned ID; HTTP 201 response.</td>
+          <td>Guest Registration</td>
+          <td>Submit Add Guest form with First Name, Last Name, DOB, Gender, and 10-digit mobile.</td>
+          <td>Guest inserted into MySQL; auto G_ID assigned; UI refreshes.</td>
+          <td>Record created; visible in database and results view. <em>(Verified in Figure 8.2 & 8.4)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
         <tr>
           <td><strong>TC-02</strong></td>
           <td>Guest Validation</td>
-          <td>Attempt to register a guest with an invalid mobile number (<code>12345</code> or letters).</td>
-          <td>Server-side <code>CHECK</code> constraint (<code>chk_guest_mob</code>) or client validation blocks insertion.</td>
-          <td>Submission rejected; error alert shown; no database write attempted.</td>
+          <td>Attempt to register guest with invalid mobile (less than 10 digits).</td>
+          <td>HTML5 regex constraint pattern prevents form submission.</td>
+          <td>Submission blocked by browser validation; no DB write occurred. <em>(Verified in UI form constraints)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
         <tr>
           <td><strong>TC-03</strong></td>
           <td>Room Inventory</td>
-          <td>Toggle the "Available Only" room filter on the Room Management page.</td>
-          <td>Filter queries <code>/api/rooms?available=true</code>; displays only rooms with status <code>Available</code>.</td>
-          <td>Occupied rooms excluded; only available rooms rendered in the table.</td>
+          <td>Submit Add Room form with Type: Single, Capacity: 1, Price: 1500, Availability: Available.</td>
+          <td>Room entity inserted into Room table; initial availability set.</td>
+          <td>Room saved successfully; ready for reservation allocation. <em>(Verified in Figure 8.2)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
         <tr>
           <td><strong>TC-04</strong></td>
-          <td>Booking Creation</td>
-          <td>Create a booking with valid <code>G_ID</code>, available <code>R_ID</code>, and check-in/out dates.</td>
-          <td><code>Booking_Record</code> inserted; total cost computed; room status updated to <code>Occupied</code>.</td>
-          <td>Booking successfully registered; room status toggled to <code>Occupied</code> in DB.</td>
+          <td>Booking Allocation</td>
+          <td>Create booking linking registered Guest and Room with Walk-in type and Confirmed status.</td>
+          <td>Booking_Record inserted with temporal amount snapshot; linked via FK.</td>
+          <td>Booking created successfully; visible in Retrieve / Search table. <em>(Verified in Figure 8.2 & 8.4)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
         <tr>
           <td><strong>TC-05</strong></td>
-          <td>View Verification</td>
-          <td>Query <code>/api/bookings?detailed</code> to verify the <code>vw_booking_details</code> SQL view.</td>
-          <td>Returns unified JSON records containing joined Guest Name, Mobile, Room No, and Dates.</td>
-          <td>View successfully queried; full joined guest and room metadata returned.</td>
+          <td>Relational View Query</td>
+          <td>Execute search on '2. Retrieve / Search' tab against vw_booking_details with filter criteria.</td>
+          <td>Unified JSON records returned joining Guest, Room, Dates, and Status.</td>
+          <td>View queried live; results table renders joined records with SQL preview. <em>(Verified in Figure 8.4)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
         <tr>
           <td><strong>TC-06</strong></td>
           <td>Billing Settlement</td>
-          <td>Generate a bill for an active booking with payment method <code>UPI</code> and status <code>Paid</code>.</td>
-          <td>Record written to <code>Bill</code> table; linked via foreign key to <code>Booking_ID</code>.</td>
-          <td>Invoice generated and displayed; amount matches booking calculation.</td>
+          <td>Submit Add Bill form linking Guest and active Booking with Amount and Status: Unpaid.</td>
+          <td>Invoice record inserted into Bill table with foreign key linkage.</td>
+          <td>Bill saved successfully with Unpaid status; linked to guest. <em>(Verified in Figure 8.5)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
         <tr>
           <td><strong>TC-07</strong></td>
-          <td>Relational Delete</td>
-          <td>Delete a guest with dependent bookings to test <code>ON DELETE CASCADE</code>.</td>
-          <td>Deletion cascades to remove associated <code>Booking_Record</code> and <code>Bill</code> rows.</td>
-          <td>Foreign key cascade triggered; dependent bookings safely pruned.</td>
+          <td>Diagnostic Health</td>
+          <td>Send HTTP GET request to /api/health over public IP on Port 80.</td>
+          <td>JSON response returned: <code>{"status":"UP","db":"hotel_management"}</code>.</td>
+          <td>HTTP 200 OK received with UP status confirming JDBC database pool. <em>(Verified in Figure 8.6)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
         <tr>
           <td><strong>TC-08</strong></td>
-          <td>Diagnostic Health</td>
-          <td>Send HTTP GET request to <code>/api/health</code>.</td>
-          <td>JSON response <code>{"status":"UP","db":"hotel_management"}</code> returned with HTTP 200.</td>
-          <td>HTTP 200 OK received; connection to <code>hotel_management</code> verified.</td>
+          <td>Nginx Reverse Proxy</td>
+          <td>Access web application via public IPv4 (<code>http://15.206.165.236/</code>) without port specification.</td>
+          <td>Nginx routes port 80 to React frontend and proxies <code>/api/*</code> internally.</td>
+          <td>Web application loads seamlessly; live health status shows DB: UP. <em>(Verified in Figure 9.6)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
         <tr>
           <td><strong>TC-09</strong></td>
-          <td>Nginx Reverse Proxy</td>
-          <td>Access backend API externally via <code>http://&lt;EC2-IP&gt;/api/guests</code> on Port 80.</td>
-          <td>Nginx transparently proxies the request to internal port 8080; returns JSON array.</td>
-          <td>Guests JSON array returned without CORS errors; internal port unexposed.</td>
+          <td>Container Orchestration</td>
+          <td>Execute <code>sudo docker compose ps</code> on EC2 host to verify container health.</td>
+          <td>Frontend, backend, and db containers active with db reported healthy.</td>
+          <td>All 3 containers active; db healthy; ports mapped correctly. <em>(Verified in Figure 9.4)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
         <tr>
           <td><strong>TC-10</strong></td>
-          <td>SPA Fallback Routing</td>
-          <td>Refresh browser on a non-root route (e.g., <code>http://&lt;EC2-IP&gt;/guests</code>).</td>
-          <td>Nginx <code>try_files</code> rule serves <code>index.html</code>; React router handles navigation without 404.</td>
-          <td>Page refreshes correctly; React Single Page Application state preserved.</td>
+          <td>Schema Verification</td>
+          <td>Execute <code>SHOW TABLES;</code> inside MySQL container via Docker CLI.</td>
+          <td>13 BCNF relational tables and 2 SQL views listed in hotel_management schema.</td>
+          <td>All 13 tables and 2 views verified present and correctly named. <em>(Verified in Figure 9.5)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
         <tr>
           <td><strong>TC-11</strong></td>
-          <td>Container Resilience</td>
-          <td>Manually terminate the backend container via <code>docker stop hotel_backend</code>.</td>
-          <td>Docker Compose restart policy (<code>unless-stopped</code>) automatically restarts the service.</td>
-          <td>Container restarted within 5 seconds; health check recovers to healthy state.</td>
+          <td>Backend Boot & Logs</td>
+          <td>Inspect backend runtime output via <code>sudo docker compose logs backend</code>.</td>
+          <td>Java 17 HTTP server boots on port 8080; DB connection established.</td>
+          <td>Logs confirm startup and '✓ DB connection OK' message. <em>(Verified in Figure 9.7)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
         <tr>
           <td><strong>TC-12</strong></td>
-          <td>Database Persistence</td>
-          <td>Restart all containers via <code>docker compose down</code> followed by <code>docker compose up -d</code>.</td>
-          <td>MySQL data volume (<code>db_data</code>) retains all created guests, rooms, and bookings.</td>
-          <td>Data fully intact after full restart; persistent named volume verified.</td>
+          <td>Host Telemetry</td>
+          <td>Monitor compute and network metrics in EC2 Console integrated CloudWatch monitoring.</td>
+          <td>Telemetry shows CPU utilization peak at 21.23% and network ingress of 162.4MB.</td>
+          <td>Metrics captured in CloudWatch graphs confirming stable resource utilization. <em>(Verified in Figure 9.8)</em></td>
           <td><span class="pass-badge">PASS</span></td>
         </tr>
       </tbody>
@@ -877,7 +893,7 @@
       <li><strong>Academic & Architectural Rigor:</strong> The database strictly adheres to <strong>Boyce-Codd Normal Form (BCNF)</strong> across 13 tables, guaranteeing complete referential integrity, eliminating data redundancy, and optimizing read operations via relational SQL views.</li>
       <li><strong>Deterministic, Lightweight Compute:</strong> By pairing a responsive React 18 SPA with a clean Java 17 JDBC API, the system eliminates bulky enterprise framework overhead, ensuring fast startup times and sub-second response latencies.</li>
       <li><strong>Cloud-Native Containerization:</strong> Multi-stage Docker packaging and Docker Compose orchestration eliminate environment parity issues, enabling seamless local-to-cloud deployment.</li>
-      <li><strong>Network & Operational Security:</strong> Nginx reverse proxying isolates backend microservices and database ports from public exposure, eliminating CORS errors and centralizing HTTP routing on port 80.</li>
+      <li><strong>Network & Operational Security:</strong> Nginx reverse proxying acts as the public entry point on Port 80, eliminating CORS errors and shielding backend microservices and database ports behind the AWS Security Group firewall.</li>
       <li><strong>Cost-Effective Scalability:</strong> The entire architecture operates comfortably within the <strong>AWS Free Tier</strong>, utilizing virtual swap space on Ubuntu to ensure rock-solid stability on modest hardware.</li>
     </ol>
 
@@ -890,7 +906,7 @@
       <li>Oracle Corporation, "MySQL 8.0 Reference Manual — Optimization, Views, and InnoDB Storage Engine," 2024. [Online]. Available: https://dev.mysql.com/doc/refman/8.0/en/</li>
       <li>Oracle Corporation, "Java SE 17 Documentation & JDBC 4.3 Specification," 2024. [Online]. Available: https://docs.oracle.com/en/java/javase/17/</li>
       <li>Nginx Inc., "Nginx Reverse Proxy & HTTP Load Balancing Documentation," 2024. [Online]. Available: https://nginx.org/en/docs/http/ngx_http_proxy_module.html</li>
-      <li>Docker Inc., "Docker Compose File Version 3 Reference & Multi-Stage Builds," <em>Docker Docs</em>, 2024. [Online]. Available: https://docs.docker.com/compose/</li>
+      <li>Docker Inc., "Docker Compose Specification & Multi-Stage Builds," <em>Docker Docs</em>, 2024. [Online]. Available: https://docs.docker.com/compose/</li>
       <li>Meta Platforms, "React 18 Documentation — Concurrent Rendering and Hooks," 2024. [Online]. Available: https://react.dev/</li>
       <li>A. Silberschatz, H. F. Korth, and S. Sudarshan, <em>Database System Concepts</em>, 7th ed., New York, NY: McGraw-Hill Education, 2020.</li>
       <li>R. Elmasri and S. B. Navathe, <em>Fundamentals of Database Systems</em>, 7th ed., Boston, MA: Pearson, 2016.</li>
